@@ -1,0 +1,470 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DjVu Sep.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\DjVu Sep.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_NEW_FOLDER DIALOG DISCARDABLE  0, 0, 186, 68
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "New folder"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,47,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,104,47,50,14
+    EDITTEXT        IDC_EDIT_NEW_FOLDER,7,20,172,14,ES_AUTOHSCROLL
+    LTEXT           "Enter the new folder name:",IDC_STATIC_NEW_FOLDER_NAME,
+                    7,7,122,8
+END
+
+IDD_DIALOG_OPTIONS DIALOG DISCARDABLE  0, 0, 320, 200
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Open DjVu-file after converting",
+                    IDC_CHECK_OPEN_CONVERTED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,16,38,174,8
+    EDITTEXT        IDC_EDIT_OUT_SUFFIX,94,86,35,12,ES_AUTOHSCROLL
+    LTEXT           "Output file suffix:",IDC_STATIC_OUT_SUFFIX,16,88,75,8
+    CONTROL         "Open DjVu-file after inseting",IDC_CHECK_OPEN_INSERTED,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,55,174,8
+    GROUPBOX        "Main",IDC_STATIC_MAIN_OPTIONS,7,7,305,98
+    CONTROL         "Output to Desktop",IDC_CHECK_OUTPUT_DESKTOP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,16,72,171,8
+    CONTROL         "Custom Filename",IDC_CHECK_CUSTOM_FILENAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,113,90,8
+    EDITTEXT        IDC_EDIT_FILE_ADDON2,80,150,35,12,ES_AUTOHSCROLL
+    LTEXT           "Filename addon:",IDC_STATIC_FILE_ADDON2,15,152,62,8
+    GROUPBOX        "Background",IDC_STATIC_BACKGROUND,7,128,305,64
+    COMBOBOX        IDC_COMBO_LANGUAGE,204,34,103,43,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Interface language:",IDC_STATIC_LANGUAGE,204,20,100,8
+    CONTROL         "DPI",IDC_CHECK_DPI,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,16,20,25,9
+    COMBOBOX        IDC_COMBO_DPI,48,18,43,94,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Prefix",IDC_PREFIX2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,14,173,51,8
+    CONTROL         "Suffix",IDC_SUFFIX2,"Button",BS_AUTORADIOBUTTON,67,173,
+                    49,8
+    CONTROL         "None",IDC_NONE2,"Button",BS_AUTORADIOBUTTON,124,173,32,
+                    8
+    CONTROL         "Recognize Scan Tailor filenames",
+                    IDC_CHECK_RECOGNIZE_ST_FILENAMES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,175,113,137,8
+END
+
+IDD_DIALOG_PROGRESS DIALOG DISCARDABLE  0, 0, 297, 66
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Progress"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Processing is in progress...",IDC_STATIC_ENC_STATUS,7,4,
+                    171,8
+    CONTROL         "Progress1",IDC_PROGRESS_ENCODING,"msctls_progress32",
+                    WS_BORDER,7,18,283,12
+    PUSHBUTTON      "Cancel",IDC_BUTTON_ENC_CANCEL,118,44,61,16
+    LTEXT           "Processed pages:  ",IDC_STATIC_ENC_PAGES,7,33,171,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG_NEW_FOLDER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 61
+    END
+
+    IDD_DIALOG_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 312
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 192
+    END
+
+    IDD_DIALOG_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 59
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DJVUSEP_DIALOG DIALOGEX 0, 0, 320, 200
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DjVu Imager"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Open file(s)",IDC_BUTTON_OPEN_FILES,110,9,67,16
+    PUSHBUTTON      "Open folder",IDC_BUTTON_OPEN_FOLDER,187,9,62,16
+    GROUPBOX        "Input file(s):",IDC_STATIC_INPUT,6,2,306,191
+    PUSHBUTTON      "Convert",IDC_BUTTON_CONVERT,102,106,50,16
+    PUSHBUTTON      "+",IDC_BUTTON_ADD,266,9,18,16
+    PUSHBUTTON      "-",IDC_BUTTON_REMOVE,287,9,18,16
+    PUSHBUTTON      "Insert in DjVu",IDC_BUTTON_INSERT_DJVU,102,135,80,16
+    PUSHBUTTON      "Dest",IDC_BUTTON_OUTPUT_DJVU,280,175,29,13
+    EDITTEXT        IDC_EDIT_OUTPUT_DJVU,102,175,175,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_BSF,121,52,36,115,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Parameters",IDC_STATIC_PARAMETERS,101,32,205,39
+    PUSHBUTTON      "Options",IDC_BUTTON_OPTIONS,213,135,50,16
+    PUSHBUTTON      "Help",IDC_BUTTON_HELP,270,135,37,16
+    PUSHBUTTON      "View",IDC_BUTTON_VIEW,157,106,45,16
+    PUSHBUTTON      "Current",IDC_BUTTON_CURRENT,264,106,43,16
+    CONTROL         "BSF",IDC_CHECK_BSF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,121,43,35,8
+    CONTROL         "All files",IDC_RADIO_ALL,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,138,84,59,8
+    CONTROL         "Current file",IDC_RADIO_CURRENT,"Button",
+                    BS_AUTORADIOBUTTON,216,84,69,8
+    GROUPBOX        "Apply to",IDC_STATIC_APPLY_TO,101,75,205,23
+    CONTROL         "Background quality",IDC_CHECK_BG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,192,43,83,8
+    PUSHBUTTON      "C",IDC_BUTTON_RESET,291,82,12,12
+    PUSHBUTTON      "Source",IDC_BUTTON_INPUT_DJVU,280,159,29,13
+    EDITTEXT        IDC_EDIT_INPUT_DJVU,102,159,175,12,ES_AUTOHSCROLL
+    CTEXT           "Size",IDC_STATIC_SIZE,203,106,60,16,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SLIDER_BG,"msctls_trackbar32",TBS_NOTICKS | 
+                    TBS_ENABLESELRANGE | WS_TABSTOP,189,55,111,11
+    LTEXT           "00",IDC_STATIC_BG,286,43,10,8
+    CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_OWNERDRAWFIXED | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,12,14,84,173,WS_EX_ACCEPTFILES
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DJVUSEP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,9,0,0
+ PRODUCTVERSION 2,9,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "This program is under ""GPL 2 und later"" license.\0"
+            VALUE "CompanyName", "monday2000@yandex.ru\0"
+            VALUE "FileDescription", "DjVu Imager MFC Application\0"
+            VALUE "FileVersion", "2, 9, 0, 0\0"
+            VALUE "InternalName", "DjVu Imager\0"
+            VALUE "LegalCopyright", "Alexey Kryukov, monday2000 (C) 2009-2010\0"
+            VALUE "LegalTrademarks", "DjVu Imager\0"
+            VALUE "OriginalFilename", "DjVu Imager.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "DjVu Imager\0"
+            VALUE "ProductVersion", "2, 9, 0, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STRING_SK_BACKGROUND_FILES "SK v5.91 background subscans"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STRING_CHOOSE_INPUT_FILES "Choose the input folder:"
+    STRING_CHOOSE_OUTPUT_FOLDER "Choose the output folder:"
+    STRING_CREATE_NEW_FOLDER "Create new folder"
+    STRING_OPEN_FOLDER      "Open Folder"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STRING_NEW_FOLDER       "New folder"
+    STRING_NEW_FOLDER_NAME  "Enter the new folder name:"
+    IDC_STATIC_INPUT2       "Input file(s):"
+    IDC_BUTTON_OPEN_FILES2  "Open file(s)"
+    IDC_BUTTON_OPEN_FOLDER2 "Open folder"
+    IDC_STATIC_PARAMETERS2  "Parameters"
+    IDC_CHECK_BSF2          "BSF"
+    IDC_STATIC_APPLY_TO2    "Apply to"
+    IDC_RADIO_ALL2          "All files"
+    IDC_RADIO_CURRENT2      "Current file"
+    IDC_BUTTON_CONVERT2     "Convert"
+    IDC_BUTTON_VIEW2        "View"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_CURRENT2     "Current"
+    IDC_BUTTON_INSERT_DJVU2 "Insert in DjVu"
+    IDC_BUTTON_OPTIONS2     "Options"
+    IDC_BUTTON_HELP2        "Help"
+    IDC_BUTTON_INPUT_DJVU2  "Source"
+    IDC_BUTTON_OUTPUT_DJVU2 "Dest"
+    IDS_STRING_KB           "KB"
+    IDD_DIALOG_OPTIONS2     "Options"
+    IDC_STATIC_MAIN_OPTIONS2 "Main"
+    IDC_CHECK_OPEN_CONVERTED2 "Open DjVu-file after converting"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CHECK_OPEN_INSERTED2 "Open DjVu-file after inseting"
+    IDC_CHECK_OUTPUT_DESKTOP2 "Output to Desktop"
+    IDC_STATIC_OUT_SUFFIX2  "Output file suffix:"
+    IDC_CHECK_CUSTOM_FILENAME2 "Custom Filename"
+    IDC_STATIC_FOREGROUND2  "Foreground"
+    STRING_CANCEL           "Cancel"
+    STRING_PROCESSED_PAGES  "Processed pages:"
+    STRING_OF               "of"
+    STRING_CONVERSION_FAILED "Conversion failed."
+    STRING_CONVERSION_STOPPED "Conversion stopped."
+    STRING_CONVERSION_SUCCESS "Conversion successfully ended."
+    STRING_PROGRESS         "Progress"
+    STRING_PROGRESS_STATUS  "Processing is in progress..."
+    STRING_FORE_FILES       "Foreground subscans"
+    STRING_BACK_FILES       "Background subscans"
+    STRING_WRONG_DJVU       "No DjVu file is chosen or wrong DjVu filename."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_STATIC_FILE_ADDON2  "Filename addon:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_STATIC_BACKGROUND2  "Background"
+    IDC_STATIC_FILE_ADDON22 "Filename addon:"
+    IDC_PREFIX22            "Prefix"
+    IDC_SUFFIX22            "Suffix"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_NONE22              "None"
+    HELP_PATHNAME           "eng.htm"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDD_DIALOG_OPTIONS      "Options"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STRING_WRONG_OUTDJVU    "Output DjVu file has wrong filename."
+    STRING_WRONG_DJVUPICS   "No DjVu pics are yet created."
+    STRING_WRONG_INSERT     "Insertion failed."
+    STRING_GOOD_INSERT      "Insertion successfully finished."
+    STRING_NO_VIEWER        "Processing successfully finished.\nBut no DjVu viewer is installed on your computer."
+    STRING_PROCESSING_FAILED "Processing failed."
+    STRING_NO_INPUTDJVU     "Input target DjVu file is not found."
+    STRING_BAD_FORE_ADDON   "The foreground filename addon is a digit - but must be a string."
+    STRING_EMPTY_BACK_ADDON "The background filename addon field is empty."
+    STRING_BAD_BACK_ADDON   "The background filename addon is a digit - not a string."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STRING_EMPTY_FORE_ADDON "The foreground filename addon field is empty."
+    IDC_CHECK_BG2           "Background quality"
+    STRING_REMOVE_FILE      "Remove the file"
+    STRING_FROM_LIST        "from the list?"
+    STRING_QFILES           "The file(s):"
+    STRING_TOO_COLORS       "had > 4080 colors and were quantized to 8-bit."
+    STRING_ERROR_ON_FILE    "Error on the file"
+    STRING_FIT_BITMAPS      "Only FIT_BITMAP images are supported."
+    STRING_ONLY_24_8_BITMAPS 
+                            "Only 24-bit color or 8-bit greyscale images are supported."
+    STRING_RASTER_FILES     "Raster files"
+    STRING_FILES            "files"
+    STRING_LIST_COLUMN0     "Filename"
+    STRING_LIST_COLUMN1     "#"
+    STRING_NON_NUMERIC      "The value is not numeric."
+    IDC_CHECK_RECOGNIZE_ST_FILENAMES2 "Recognize Scan Tailor filenames"
+    STRING_NOT_EQUAL1       "The sizes of the illustration"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STRING_NOT_EQUAL2       "do not correlate with the sizes"
+    STRING_NOT_EQUAL3       "of the corresponding pasted-on DjVu-page."
+    STRING_NOT_EQUAL4       "Processing aborted."
+    STRING_INSERTION        "Вставка"
+    STRING_INSERTION_STATUS "Insertion is in progress..."
+    STRING_INSERTION_STOPPED "Insertion stopped."
+    STRING_NOT_NUMBER1      "The number of the illustration"
+    STRING_NOT_NUMBER2      "which is not within the pages range (1-"
+    STRING_NOT_NUMBER3      "of the pasted-on DjVu-file."
+    STRING_NOT_NUMBER4      "is"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\DjVu Sep.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

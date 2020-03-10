@@ -1,0 +1,156 @@
+
+DjVu Imager History
+
+v 1.1:
+
+- c44 console utility is exchanged to fi_c44 console utility (for the sake of the speed).
+
+v 1.2:
+
+- a bug fixed: the program did not work previosly on the single-page DjVu files.
+
+v 1.3:
+
+- a bug fixed: the crush on the last pages of the multypage DjVu files (empty lines in the dump
+ file caused an error).
+
+- a bug fixed: the crush on the shared-shapes tags in the dump files.
+
+- a feature added: the support for the BW DjVu-files created in DjVu Solo.
+
+v 1.4:
+
+- a bug fixed: the program did not paste the background on the empty DjVu-pages (that contained
+ only the INFO entry).
+
+v 1.5:
+
+- a bug fixed: again the program did not work previosly on the single-page DjVu files (remake of
+ v1.2 correction).
+
+v 1.6:
+
+- 2 bugs fixed: 
+
+- after introducing v1.5 the program started to isert 2 or more pics in the wrong order (on the
+ pages of a multypage DjVu file).
+
+- the program earlier did not process the multypage DjVu files containing whitespaces and
+Cyrillic characters in the internal names of its pages.
+This bug was fixed by Leon Bottou because it was determined by the bugs in djvumake and djvudump
+(it lead to the update of djvumake and djvudump in DjVuLibre CVS).
+
+v 1.7:
+
+- a bug fixed: the program processed only 2 chunks on the single-page DjVu files (INFO and 
+the next one in the chunks list). That usually resulted in the FGbz chunk loss.
+
+v 1.8:
+
+- a bug fixed (in djvumake): the orientaion flag is fixed for the 0 degrees position. Now the 
+djvumake'd file is displayed properly in DjVu Reader v2.0.0.26.
+
+v 1.9:
+
+- a bug fixed: if the program was launched by the shortcut to the program's exe then launching 
+any console utility from within the program caused the black console window to appear for a 
+moment.
+
+v 1.10:
+
+- a bug fixed: when inserting a picture on an empty page the DPI value changed. That resulted 
+to the improper displaying of this DjVu-file in WinDjView.
+
+v 2.0:
+
+- This version introduces the new searching principle while finding the glued-on page. Earlier 
+the match comparision was based on the NAME of an internal DjVu page file, and now the match is
+searched by the NUMBER of an internal DjVu page file. This assures the 100% accuracy of the
+match "glued-in - glued-on" DjVu-pages.
+
+Restriction: the glued-on graphical files must have digits in their filenames, and each such
+filename must create a unique number representation after the "filename->number" conversion.
+
+The non-digit characters in the filenames are ignored during the "filename-number" conversion.
+
+The best advised filenames are: 
+
+0001.tif, 0002.tif, ... 0010.tif, ... 
+or 
+0001.tif, 0002.tif, ... 0010.tif, ... 
+or 
+1.tif, 2.tif, ... 10.tif, ... 
+or 
+aa1.tif, 2gg.tif, ... fd10gg.tif, ... 
+
+Forbidden is something like this:
+
+aa0001.tif, bb0001.tif, ... cc0001.tif, ...   (would be converted to non-unique numbers)
+or 
+0002nnn1.tif, 0002kkk1.tif, ... 0021.tif, ... (would be converted to non-unique numbers)
+
+- The "None" custom filename filter is introduced (and made the default one).
+
+- The input folder and the ouput folder now remember the last opened folder (for the next
+ opening).
+
+v 2.1:
+
+- This subversion introduces a new feature - the auto-calculated scan numbers.
+The filelist has now an extra column - which is filled automatically (at files opening)
+with file numbers calculated on the basis of the names of the loaded files.
+You can change any such number by double-clicking on it.
+Every number signifies the DjVu-page number where this file-illustration is going
+to be glued on.
+
+- Another filename filter is added - "Recognize Scan Tailor filenames".
+It provides for the proper calculation of the numbers of Scan Tailor filenames.
+
+v 2.2:
+
+- A bug fixed. The loaded files were sorted in the filelist after the file numbers
+auto-calculation.
+
+v 2.3:
+
+- a bug fixed: the orientaion flag is fixed for the 0 degrees position - specially for
+the case of the background-only DjVu-pages. Now the djvumake'd file is displayed properly
+in DjVu Reader v2.0.0.26.
+
+- a bug fixed: the background-only DjVu-pages were created improperly which caused to error
+when opening such files in DjVu Reader v2.0.0.26.
+
+v 2.4:
+
+- Added a checkup of the sizes equality between the illustration to be pasted and the
+corresponding pasted-on DjVu-page.
+
+v 2.5:
+
+- The the sizes checkup introduced in the previous version is extended to the case of the subsampled
+incoming illustrations.
+
+v 2.6:
+
+- The progress dialog for the illustration insertion procedure is introduced.
+- The page number checkup is introduced (according to the pasted-on DjVu file page range).
+- The checkup at the manual illustration number editing is improved.
+
+- a bug fixed: the "+" button did not have the free filename filter while "Custom filename - None" was on.
+- a bug fixed: the "Recognize Scan Tailor filenames" option did not work correctly on some filenames.
+
+v 2.7:
+
+- a bug fixed: the illustration number auto-calculation worked wrong on some filenames.
+
+v 2.8:
+
+- The interface language is now auto-selected at the very first program launch - depending on the language of 
+the current user locale (currently only "Russian" is available, otherwise "English" is set).
+
+- a bug fixed: if an error occurred during the encoding the program could not be closed then,
+and the progress bar was not filled to the end.
+
+v 2.9:
+
+- a bug fixed: a DjVu with the FG44 chunk was treated improperly.
