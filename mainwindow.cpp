@@ -384,11 +384,13 @@ void MainWindow::propagetePageSettingsChanges()
 void MainWindow::on_tblFiles_currentCellChanged(int currentRow, int /*currentColumn*/, int /*previousRow*/, int /*previousColumn*/)
 {
     QTableWidgetItem* it = ui->tblFiles->item(currentRow, 1);
-    int page = it->text().toInt();
-    if (m_customPageSettings.contains(page)) {
-        displayPageSetting(m_customPageSettings[page]);
-    } else {
-        displayDefaultPageSetting();
+    if (it) {
+        int page = it->text().toInt();
+        if (m_customPageSettings.contains(page)) {
+            displayPageSetting(m_customPageSettings[page]);
+        } else {
+            displayDefaultPageSetting();
+        }
     }
 }
 
