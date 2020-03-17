@@ -164,45 +164,44 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QCheckBox" name="cbCustomFilename">
-       <property name="text">
-        <string>Custom Filename</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="cbRecognizeSTFilename">
-       <property name="text">
-        <string>Recognize Scan Tailor filenames</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="gbBackground">
+    <widget class="QGroupBox" name="gbRegExp">
      <property name="title">
-      <string>Background</string>
+      <string>Custom RegExp to retrieve page number from filename:</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>Filename addon:</string>
+           <string>RegExp:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="edAddon">
+         <widget class="QLineEdit" name="edRegExp">
           <property name="text">
-           <string notr="true">b</string>
+           <string notr="true">.*?([0-9]+).*?</string>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Group:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="sbGroup">
+          <property name="minimum">
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -219,31 +218,49 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <widget class="QPushButton" name="btnTest">
+          <property name="text">
+           <string>Test</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QRadioButton" name="rbPrefix">
-          <property name="text">
-           <string>Prefix</string>
+         <widget class="QPlainTextEdit" name="teDemoSrc">
+          <property name="plainText">
+           <string>00016.sep.tiff
+Image01_page19.jpg
+p17.png
+page10
+0124_01.jpg</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="rbSuffix">
+         <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Suffix</string>
+           <string notr="true">-&gt;</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="rbNone">
-          <property name="text">
-           <string>None</string>
+         <widget class="QPlainTextEdit" name="teDemo">
+          <property name="styleSheet">
+           <string notr="true">background-color: palette(window)</string>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <spacer name="horizontalSpacer_4">
           <property name="orientation">
@@ -256,6 +273,13 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnResetRegExp">
+          <property name="text">
+           <string>Reset to default RegExp</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

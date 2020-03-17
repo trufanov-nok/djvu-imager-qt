@@ -128,11 +128,18 @@ void MainWindow::addOrOpenFiles(bool isOpen)
 
     const QStringList files = QFileDialog::getOpenFileNames(
                 this, QString(), m_lastOpenPath,
-                tr("SK v5.91 background subscans") + " (*.sep.bmp *.sep.jpeg *.sep.jpg *.sep.gif *.sep.tiff *.sep.tif *.sep.pnm *.sep.ppm *.sep.pgm *.sep.pbm *.sep.png)"
+                tr("SK v5.91 background subscans") + " (*.sep.bmp *.sep.jpeg *.sep.jpg *.sep.gif *.sep.tiff *.sep.tif *.sep.pnm *.sep.ppm *.sep.pgm *.sep.pbm *.sep.png);;" +
+                tr("All images") + " (*.bmp *.jpeg *.jpg *.gif *.tiff *.tif *.pnm *.ppm *.pgm *.pbm *.png);;" +
+                tr("All files") + " (*.*)"
                 );
 
     if (!files.isEmpty()) {
-        ui->tblFiles->displayTableItems(files, isOpen);
+        if (m_settings.value("customRegexp", false).toBool()) {
+            ui->tblFiles->displayTableItems(files, isOpen, m_settings.value("regexp", ".*?([0-9]+).*?").toString(),
+                                            m_settings.value("regexpGroup", 1).toInt());
+        } else {
+            ui->tblFiles->displayTableItems(files, isOpen);
+        }
         m_lastOpenPath = QDir(files[0]).path();
     }
 }
@@ -155,7 +162,12 @@ void MainWindow::on_btnOpenFolder_clicked()
 
         QStringList files = dir.entryList(QDir::Files);
         if (!files.isEmpty()) {
-            ui->tblFiles->displayTableItems(files);
+            if (m_settings.value("customRegexp", false).toBool()) {
+                ui->tblFiles->displayTableItems(files, true, m_settings.value("regexp", ".*?([0-9]+).*?").toString(),
+                                                m_settings.value("regexpGroup", 1).toInt());
+            } else {
+                ui->tblFiles->displayTableItems(files);
+            }
         }
         m_lastOpenPath = selected_dir;
     }

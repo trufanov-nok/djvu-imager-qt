@@ -66,7 +66,7 @@ QStringList QMyTableWidget::filePathsData() const
     return res;
 }
 
-void QMyTableWidget::displayTableItems(const QStringList& files, bool clear)
+void QMyTableWidget::displayTableItems(const QStringList& files, bool clear, const QString& regexp, int group)
 {
     blockSignals(true);
     setSortingEnabled(false);
@@ -74,7 +74,7 @@ void QMyTableWidget::displayTableItems(const QStringList& files, bool clear)
         setRowCount(0);
     }
     QFileInfo fi;
-    QRegularExpression re(".*?([0-9]+).*?\\.sep\\..*", QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression re(regexp, QRegularExpression::CaseInsensitiveOption);
 
 
     for (int i = 0; i < files.count(); i++) {
@@ -83,7 +83,7 @@ void QMyTableWidget::displayTableItems(const QStringList& files, bool clear)
         const QRegularExpressionMatch m = re.match(filename);
         if (m.hasMatch() && m.matchType() == QRegularExpression::NormalMatch) {
             bool isOk= false;
-            QString col2 = QString::number(m.captured(1).toInt(&isOk));
+            QString col2 = QString::number(m.captured(group).toInt(&isOk));
             if (col2.isNull()) col2 = QString::number(i);
             const int new_row = rowCount();
             setRowCount(new_row+1);

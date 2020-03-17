@@ -4,14 +4,16 @@
 #include "config.h"
 #include "utils.h"
 #include <QDir>
+#include <QScrollBar>
 
 AppSettings::AppSettings():
     changeDPI(false), DPI(100),
     openAfterConv(false), openAfterIns(false),
     outputToDesktop(false), outputFileSuffix("out"),
     language("en"),
-    customFilename(false),
-    fnAddon("b"), addonState(0), recognizeST(true)
+    customRegexp(false),
+    regexp(".*?([0-9]+).*?"),
+    regexpGroup(1)
 {
 }
 
@@ -23,7 +25,6 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->cbDPI, &QCheckBox::stateChanged, ui->comboDPI, &QComboBox::setEnabled);
-    connect(ui->cbCustomFilename, &QCheckBox::stateChanged, ui->gbBackground, &QGroupBox::setEnabled);
 
     loadAppSettings();
     displayAppSettings();
@@ -47,21 +48,9 @@ void OptionsDialog::displayAppSettings()
     ui->edOutputFileSuffix->setText(m_appSettings.outputFileSuffix);
     initLanguageList(m_appSettings.language);
 
-    ui->cbCustomFilename->setChecked(m_appSettings.customFilename);
-    ui->cbCustomFilename->stateChanged(m_appSettings.customFilename);
-
-    ui->edAddon->setText(m_appSettings.fnAddon);
-    switch (m_appSettings.addonState) {
-    case 0: ui->rbNone->setChecked(true);
-        break;
-    case 1: ui->rbSuffix->setChecked(true);
-        break;
-    default:
-        ui->rbPrefix->setChecked(true);
-    }
-
-    ui->cbRecognizeSTFilename->setChecked(m_appSettings.recognizeST);
-
+    ui->gbRegExp->setChecked(m_appSettings.customRegexp);
+    ui->edRegExp->setText(m_appSettings.regexp);
+    ui->sbGroup->setValue(m_appSettings.regexpGroup);
 }
 
 void OptionsDialog::storeAppSettings()
@@ -73,15 +62,9 @@ void OptionsDialog::storeAppSettings()
     m_appSettings.outputToDesktop = ui->cbOutpDesktop->isChecked();
     m_appSettings.outputFileSuffix = ui->edOutputFileSuffix->text();
     m_appSettings.language =  ui->comboLang->itemData(ui->comboLang->currentIndex()).toString();
-    m_appSettings.customFilename = ui->cbCustomFilename->isChecked();
-    m_appSettings.fnAddon = ui->edAddon->text();
-    m_appSettings.addonState = 0;
-    if (ui->rbSuffix->isChecked()) {
-        m_appSettings.addonState = 2;
-    } else if (ui->rbPrefix->isChecked()) {
-        m_appSettings.addonState = 3;
-    }
-    m_appSettings.recognizeST = ui->cbRecognizeSTFilename->isChecked();
+    m_appSettings.customRegexp = ui->gbRegExp->isChecked();
+    m_appSettings.regexp = ui->edRegExp->text();
+    m_appSettings.regexpGroup = ui->sbGroup->value();
 }
 
 
@@ -94,10 +77,9 @@ void OptionsDialog::saveAppSettings()
     m_settings.setValue("outputToDesktop", m_appSettings.outputToDesktop);
     m_settings.setValue("outputFileSuffix", m_appSettings.outputFileSuffix);
     m_settings.setValue("language", m_appSettings.language);
-    m_settings.setValue("customFilename", m_appSettings.customFilename);
-    m_settings.setValue("fnAddon", m_appSettings.fnAddon);
-    m_settings.setValue("addonState", m_appSettings.addonState);
-    m_settings.setValue("recognizeST", m_appSettings.recognizeST);
+    m_settings.setValue("customRegexp", m_appSettings.customRegexp);
+    m_settings.setValue("regexp", m_appSettings.regexp);
+    m_settings.setValue("regexpGroup", m_appSettings.regexpGroup);
 }
 
 void OptionsDialog::loadAppSettings()
@@ -109,10 +91,9 @@ void OptionsDialog::loadAppSettings()
     m_appSettings.outputToDesktop = m_settings.value("outputToDesktop", false).toBool();
     m_appSettings.outputFileSuffix = m_settings.value("outputFileSuffix", "out").toString();
     m_appSettings.language = m_settings.value("language", "en").toString();
-    m_appSettings.customFilename = m_settings.value("customFilename", false).toBool();
-    m_appSettings.fnAddon = m_settings.value("fnAddon", "b").toString();
-    m_appSettings.addonState = m_settings.value("addonState", 0).toInt();
-    m_appSettings.recognizeST = m_settings.value("recognizeST", true).toBool();
+    m_appSettings.customRegexp = m_settings.value("customRegexp", false).toBool();
+    m_appSettings.regexp = m_settings.value("regexp", ".*?([0-9]+).*?").toString();
+    m_appSettings.regexpGroup = m_settings.value("regexpGroup", 1).toInt();
 }
 
 void OptionsDialog::on_OptionsDialog_accepted()
@@ -158,4 +139,31 @@ void OptionsDialog::initLanguageList(QString cur_lang)
     }
 
     ui->comboLang->blockSignals(false);
+}
+
+void OptionsDialog::on_btnTest_clicked()
+{
+    int grp = ui->sbGroup->value();
+    ui->teDemo->clear();
+    QRegularExpression rex(ui->edRegExp->text());
+    for(const QString& fname: ui->teDemoSrc->toPlainText().split("\n")) {
+        QRegularExpressionMatch match = rex.match(fname);
+        bool ok = false; int res = 0;
+        if (match.isValid() && match.lastCapturedIndex() > 0) {
+            res = match.captured(grp).toInt(&ok);
+        }
+
+        if (ok) {
+            ui->teDemo->appendPlainText(tr("page #: %1").arg(res));
+        } else {
+            ui->teDemo->appendPlainText(tr("<error>"));
+        }
+    }
+    ui->teDemo->verticalScrollBar()->setValue(0);
+}
+
+void OptionsDialog::on_btnResetRegExp_clicked()
+{
+    ui->edRegExp->setText(".*?([0-9]+).*?");
+    ui->sbGroup->setValue(1);
 }

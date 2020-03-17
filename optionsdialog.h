@@ -18,10 +18,9 @@ struct AppSettings
     bool outputToDesktop;
     QString outputFileSuffix;
     QString language;
-    bool customFilename;
-    QString fnAddon;
-    int addonState;
-    bool recognizeST;
+    bool customRegexp;
+    QString regexp;
+    int regexpGroup;
     AppSettings();
 };
 
@@ -34,6 +33,8 @@ public:
     ~OptionsDialog();
 private slots:
     void on_OptionsDialog_accepted();
+    void on_btnTest_clicked();
+    void on_btnResetRegExp_clicked();
 private:
     void displayAppSettings();
     void storeAppSettings();

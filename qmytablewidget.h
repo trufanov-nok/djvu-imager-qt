@@ -11,7 +11,7 @@ protected:
     void rowCountChanged(int,int);
 public:
     QMyTableWidget(QWidget *parent = nullptr);
-    void displayTableItems(const QStringList& files, bool clear = true);
+    void displayTableItems(const QStringList& files, bool clear = true, const QString &regexp = QString(".*?([0-9]+).*?"), int group = 1);
     void clearHighlight();
     void highlightSelectedItems(bool set = true);
     QMap<int, QString> pagesToFilePathsData() const;
