@@ -14,6 +14,7 @@
 #include "qviewthread.h"
 #include "qinsertthread.h"
 
+#include "config.h"
 #include "utils.h"
 
 MainWindow* MainWindow::_top_widget_ = nullptr;

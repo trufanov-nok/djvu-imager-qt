@@ -26,7 +26,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
-set(TS_FILES DjVu_Imager-Qt_ru_RU.ts)
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_BINARY_DIR}")
+INCLUDE(cmake/UpdateTranslations.cmake)
+
+# Prepare config.h
+IF(WIN32)
+        SET(TRANSLATIONS_DIR_REL "languages")
+ELSE(WIN32)
+        SET(TRANSLATIONS_DIR_REL "share/djvu_imager-qt/languages")
+ENDIF(WIN32)
+SET(TRANSLATIONS_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${TRANSLATIONS_DIR_REL}")
+
+CONFIGURE_FILE(config.h.in ${CMAKE_BINARY_DIR}/config.h @ONLY)
+
+
+
 
 qt5_add_resources(RESOURCES "res/appicon.qrc")
 
@@ -53,21 +67,47 @@ set(SOURCES
     utils.h
     )
 
-if(ANDROID)
-  add_library(DjVu_Imager-Qt SHARED
-    ${SOURCES}
-    ${TS_FILES}
-    ${RESOURCES}
-  )
-else()
-  add_executable(DjVu_Imager-Qt
-    ${SOURCES}
-    ${TS_FILES}
-    ${RESOURCES}
-  )
-endif()
+# Translations
+TRANSLATION_SOURCES(
+        DjVu_Imager
+	${SOURCES}
+)
+FILE(GLOB TRANSLATION_FILES languages/DjVu_Imager-Qt_*.ts)
 
+FINALIZE_TRANSLATION_SET(DjVu_Imager ${TRANSLATION_FILES})
+UPDATE_TRANSLATIONS_TARGET(update_translations DjVu_Imager)
+
+SET(ts_files ${TRANSLATION_FILES})
+
+# Don't build *.qm files from *untranslated.ts
+SET(FILTERED_TRANSLATION_FILES)
+FOREACH(ts_file ${ts_files})
+        IF ("${ts_file}" MATCHES ".*untranslated.ts")
+	        # Just skip it.
+		ELSE("${ts_file}" MATCHES ".*untranslated.ts")
+		LIST(APPEND FILTERED_TRANSLATION_FILES "${ts_file}")
+		ENDIF("${ts_file}" MATCHES ".*untranslated.ts")
+ENDFOREACH(ts_file)
+
+QT5_ADD_TRANSLATION(QM_FILES ${FILTERED_TRANSLATION_FILES})
+
+IF(WIN32 OR APPLE)
+        # Just copy already compiled qtbase*.qm from translations folder
+	# if any of them are present there
+	# to support localization of Qt own controls on Win machines
+	FILE(GLOB QTBASE_QM_FILES languages/qtbase*.qm)
+	LIST(APPEND QM_FILES ${QTBASE_QM_FILES})
+ENDIF(WIN32 OR APPLE)
+
+ADD_CUSTOM_TARGET(compile_translations ALL DEPENDS ${QM_FILES})
+
+INSTALL(FILES ${QM_FILES} DESTINATION "${TRANSLATIONS_DIR_REL}/")
+
+
+add_executable(DjVu_Imager-Qt
+    ${SOURCES}
+    ${TS_FILES}
+    ${RESOURCES}
+  )
 
 target_link_libraries(DjVu_Imager-Qt PRIVATE Qt5::Widgets)
-
-qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

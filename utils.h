@@ -2,9 +2,6 @@
 #define UTILS_H
 #include <QStringList>
 
-#define TRANSLATIONS_DIR_REL "share/djvu_imager-qt/languages"
-#define TRANSLATIONS_DIR_ABS "/usr/local/share/djvu_imager-qt/languages"
-
 namespace Utils {
 
 QString findExecutable(const QString& name);

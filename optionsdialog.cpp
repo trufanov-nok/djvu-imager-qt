@@ -1,6 +1,7 @@
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 
+#include "config.h"
 #include "utils.h"
 #include <QDir>
 
