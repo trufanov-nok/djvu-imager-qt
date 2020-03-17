@@ -80,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_lastOpenPath = m_settings.value("lastPath", "").toString();
     ui->edSourceDjVu->setText(m_settings.value("lastSrcPath", "").toString());
     ui->edDestDjVu->setText(m_settings.value("lastDestPath", "").toString());
+    ui->tblFiles->horizontalHeader()->resizeSection(1, 50);
 
     m_tmpImagesFolder = QApplication::applicationDirPath() + "/tmp/images/";
     m_tmpFileFolder = QApplication::applicationDirPath() + "/tmp/files/";
@@ -119,41 +120,6 @@ void MainWindow::on_btnHelp_clicked()
     }
 }
 
-void MainWindow::displayTableItems(const QStringList& files, bool clear)
-{
-    ui->tblFiles->blockSignals(true);
-    ui->tblFiles->setSortingEnabled(false);
-    if (clear) {
-        ui->tblFiles->setRowCount(0);
-    }
-    QFileInfo fi;
-    QRegularExpression re(".*?([0-9]+).*?\\.sep\\..*", QRegularExpression::CaseInsensitiveOption);
-
-
-    for (int i = 0; i < files.count(); i++) {
-        fi.setFile(files[i]);
-        const QString filename = fi.fileName();
-        const QRegularExpressionMatch m = re.match(filename);
-        if (m.hasMatch() && m.matchType() == QRegularExpression::NormalMatch) {
-            bool isOk= false;
-            QString col2 = QString::number(m.captured(1).toInt(&isOk));
-            if (col2.isNull()) col2 = QString::number(i);
-            const int new_row = ui->tblFiles->rowCount();
-            ui->tblFiles->setRowCount(new_row+1);
-            QTableWidgetItem* item = new QTableWidgetItem( filename );
-            item->setData(0, fi.absoluteFilePath());
-            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
-            ui->tblFiles->setItem(new_row, 0, item);
-            ui->tblFiles->setItem(new_row, 1, new QTableWidgetItem( col2 ));
-        }
-    }
-
-    ui->tblFiles->setHorizontalHeaderLabels(QStringList() << tr("Filename") << tr("#"));
-    ui->tblFiles->setSortingEnabled(true);
-    ui->tblFiles->blockSignals(false);
-    ui->tblFiles->signalRowCountChanged(ui->tblFiles->rowCount());
-}
-
 void MainWindow::addOrOpenFiles(bool isOpen)
 {
     if (m_lastOpenPath.isEmpty()) {
@@ -166,7 +132,7 @@ void MainWindow::addOrOpenFiles(bool isOpen)
                 );
 
     if (!files.isEmpty()) {
-        displayTableItems(files, isOpen);
+        ui->tblFiles->displayTableItems(files, isOpen);
         m_lastOpenPath = QDir(files[0]).path();
     }
 }
@@ -189,7 +155,7 @@ void MainWindow::on_btnOpenFolder_clicked()
 
         QStringList files = dir.entryList(QDir::Files);
         if (!files.isEmpty()) {
-            displayTableItems(files);
+            ui->tblFiles->displayTableItems(files);
         }
         m_lastOpenPath = selected_dir;
     }
@@ -202,8 +168,9 @@ void MainWindow::on_btnAddFiles_clicked()
 
 void MainWindow::on_btnRemoveFiles_clicked()
 {
+    // only 1st column items are reported as cellWidget is in 2nd one
     const QList<QTableWidgetItem*> list = ui->tblFiles->selectedItems();
-    int row_cnt = list.count() / 2;
+    const int row_cnt = list.count();
 
     if (!row_cnt) {
         QMessageBox::information(this, tr("File removal", nullptr, 1), tr("Please select a file or files to remove from the list.\nThe files on drive will be kept."));
@@ -223,12 +190,18 @@ void MainWindow::on_btnRemoveFiles_clicked()
         }
     }
 
-    int removed = 0;
+    QList<int> rows;
     for (const QTableWidgetItem* item: list) {
-        if (item->column() == 0) {
-            ui->tblFiles->removeRow(item->row() - removed);
+        if (item->column() == 0) { // just to make sure
+            rows.append(item->row());
         }
     }
+
+    qSort(rows.begin(), rows.end(),  qGreater<int>());
+    for (int row: rows) {
+        ui->tblFiles->removeRow(row);
+    }
+
 }
 
 void MainWindow::on_btnSourceDjVu_clicked()

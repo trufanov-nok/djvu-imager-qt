@@ -5,7 +5,7 @@
 #include <QStringList>
 #include <QSettings>
 #include <QTranslator>
-
+#include <QIntValidator>
 #include "pageparam.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,7 +17,6 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    void displayTableItems(const QStringList&, bool clear = true);
     void addOrOpenFiles(bool isOpen = true);
 
     void loadDefaultPageSetting();
@@ -89,4 +88,6 @@ private:
     QTranslator m_translator;
     QTranslator m_qt_translator;
 };
+
+
 #endif // MAINWINDOW_H

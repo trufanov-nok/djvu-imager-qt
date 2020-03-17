@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>553</width>
-    <height>384</height>
+    <width>632</width>
+    <height>424</height>
    </rect>
   </property>
   <property name="windowIcon">
@@ -38,18 +38,30 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>200</width>
+           <width>10</width>
            <height>0</height>
           </size>
          </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <property name="selectionMode">
-          <enum>QAbstractItemView::ContiguousSelection</enum>
+          <enum>QAbstractItemView::ExtendedSelection</enum>
          </property>
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <property name="gridStyle">
+          <enum>Qt::DotLine</enum>
+         </property>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>5</number>
+         </attribute>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderHighlightSections">
+          <bool>false</bool>
          </attribute>
          <column>
           <property name="text">
@@ -59,6 +71,9 @@
          <column>
           <property name="text">
            <string>#</string>
+          </property>
+          <property name="textAlignment">
+           <set>AlignLeading|AlignVCenter</set>
           </property>
          </column>
         </widget>
