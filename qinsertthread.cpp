@@ -120,6 +120,7 @@ void QInsertThread::run()
             emit MainWindow::_top_widget_->error(QObject::tr("Error"),
                                   QObject::tr("The number of the illustration \"%1\" is \"%2\" which is not within the pages range (1-%3)\n of the processed pasted-on DjVu-file.\n\nProcessing aborted.")
                                   .arg(pos).arg(page_num).arg(max_pages));
+            return;
         }
 
         fi.setFile(*it);
