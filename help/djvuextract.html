@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>DJVUEXTRACT</TITLE>
+<style type="text/css">
+<!--
+  OL,UL,P,BODY,TD,TR,TH,FORM { 
+    font-family: verdana,arial,helvetica,sans-serif; font-size:small; 
+    color: #000000; }
+  H1 { font-size: x-large; font-family: verdana,arial,helvetica,sans-serif; }
+  H2 { font-size: large; font-family: verdana,arial,helvetica,sans-serif; }
+  H3 { font-size: medium; font-family: verdana,arial,helvetica,sans-serif; }
+  H4 { font-size: small; font-family: verdana,arial,helvetica,sans-serif; }
+  H5 { font-size: x-small; font-family: verdana,arial,helvetica,sans-serif; }
+  H6 { font-size: xx-small; font-family: verdana,arial,helvetica,sans-serif; }
+--></style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<table width=100% bgcolor="#C0C0E0" border=0 cellspacing=0 cellpadding=0>
+<tr><td valign=middle align=center><h1>DJVUEXTRACT</h1></td></tr>
+</table>
+<p>
+<div style="margin-left: 2cm">
+Section: DjVuLibre-3.5 (1)<BR>Updated: 10/11/2001<BR><A HREF="#index">Index</A>
+<A HREF="index.html">Return to Main Contents</A><HR>
+
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+djvuextract - Extract chunks from DjVu image files.
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>djvuextract [-page=</B><I>pagenum</I><B>] </B><I>djvufile</I><B> [</B><I>chkid</I><B>=</B><I>filename</I><B>]...</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Program
+<B>djvuextract</B>
+
+extracts raw chunk data from a DjVu file
+<I>djvufile</I>.
+
+These chunks can then be re-assembled into DjVu files
+using program
+<B>djvumake</B>.
+
+<P>
+Option 
+<B>-page</B>
+
+can be used to specify a particular page.
+Otherwise the first page of the document is assumed.
+Each remaining argument specifies that the raw data 
+associated with all the chunks named
+<I>chkid </I>
+
+will be concatenated into the file named
+<I>filename</I>.
+
+Chunks named 
+<B>BG44</B>
+
+and 
+<B>FG44</B>
+
+are handled slightly differently:
+the program generates legal
+<FONT SIZE="-1">IW44</FONT>
+files instead of simply saving the
+raw data.
+<P>
+See the man page 
+<B><A HREF="djvumake.html">djvumake</A></B>(1)
+
+for related information.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>CREDITS</H2>
+
+This program was written by L'eon Bottou &lt;<A HREF="mailto:leonb@users.sourceforge.net">leonb@users.sourceforge.net</A>&gt; and
+was then improved by Andrei Erofeev &lt;<A HREF="mailto:andrew_erofeev@yahoo.com">andrew_erofeev@yahoo.com</A>&gt;, Bill Riemers
+&lt;<A HREF="mailto:docbill@sourceforge.net">docbill@sourceforge.net</A>&gt; and many others.
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="djvu.html">djvu</A></B>(1),
+
+<B><A HREF="djvumake.html">djvumake</A></B>(1)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">CREDITS</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="../index.html">man2html</A>,
+using the manual pages.<BR>
+<<<<<<< djvuextract.html
+Time: 20:25:28 GMT, August 21, 2004
+=======
+Time: 00:49:53 GMT, July 12, 2005
+>>>>>>> 1.18
+
+
+</div>
+<p>
+<table width=100% bgcolor="#C0C0E0" border=0 cellspacing=0 cellpadding=3>
+<tr><td valign=middle align=center><h1>DJVUEXTRACT</h1></td></tr>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>DjVu Imager</title>
+</head>
+
+<body>
+
+<h2 align="center">DjVu Imager</h2>
+
+<h3 align="center">Reference manual</h3>
+
+<p><strong>DjVu Imager</strong> - is a program which creates the grey or color
+illustrations in a DjVu-book. It is based on the combination of the background glueing and
+mask coloring methods (OS Windows).</p>
+
+<p>The program accepts the background subscans from the specially prepared <strong>subscans
+pairs</strong>, converts each background subscan to a ready DjVu-pic and inserts them into
+a target DjVu-book (e.g. a multipage black-and-white DjVu file).</p>
+
+<p>The subscans pairs are suggested to be created in the ScanKromsator 5.92 program -
+although it can be done in any graphical editor.</p>
+
+<p><strong>DjVu Imager</strong> is licensed under &quot;GPL 2 and later&quot; and has the
+open sourcecodes.</p>
+
+<p>The program works both under Win98 and under Win2000/XP.</p>
+
+<p><strong>DjVu Imager</strong> utilizes a free programmatic graphical library <a
+href="http://freeimage.sourceforge.net/">FreeImage</a> (under GPL).</p>
+
+<hr>
+
+<h4>The workflow outline:</h4>
+
+<p align="center"><strong>ScanKromsator 5.92 -&gt; subscans pairs -&gt; background subscan
+-&gt; DjVu Imager.</strong></p>
+
+<hr>
+
+<h4>Usage:</h4>
+
+<p>1. Prepare the subscans pairs in ScanKromsator 5.92.</p>
+
+<p>2. Launch <strong>DjVu Imager.exe</strong>.</p>
+
+<p>3. Open the background subscans either by choosing <strong>Open file(s) or Open folder</strong>.</p>
+
+<p>4. In the column <strong>#</strong> the program automatically forms the numbers of the
+loaded files (based on their names). Each such number signifies the DjVu-page number where
+this loaded graphical file is going to be glued on (as an illuatration). If necessary you
+can manually edit any such number (by double-clicking on it).</p>
+
+<p>5. If you wish choose the encoding parameters: <strong>BSF</strong> or <strong>Background
+quality.</strong></p>
+
+<p>6. Using the switches <strong>All files</strong> / <strong>Current file</strong>, you
+can set the individual encoding parameters for any file in the list.</p>
+
+<p>7. Press the <strong>Convert</strong> button to launch encoding of a group of the
+DjVu-pics.</p>
+
+<p>8. Choose the target DjVu-book by pressing <strong>Source</strong>. This will
+automatically fill the output DjVu path (can be changed by <strong>Dest</strong>) </p>
+
+<p>9. Press the <strong>Insert in DjVu</strong> button. The ready DjVu-pics will be
+automaticaly incorporated in the corresponding places of a copy of the target DjVu-book
+(Not that the target DjVu-book itself remains unchainged).</p>
+
+<p>10. In the folder where a target DjVu-book pathname points (<em>Desktop</em> by
+default) will be created a copy of the target DjVu-book with the inserted DjVu-pics. It is
+a result of this program work.</p>
+
+<hr>
+
+<h4>Details:</h4>
+
+<p>The file <strong>DjVu Imager.exe</strong> - is just a GUI controlling the console
+executables taken from <a href="http://djvu.sourceforge.net/">DjVuLibre</a> package:</p>
+
+<p>Utilities in use:</p>
+
+<p>- <strong>fi_c44.exe</strong> - the modified (with FreeImage support) console utility <a
+href="c44.html">с44.exe</a> (for the DjVu-pics creation).</p>
+
+<p>- <strong><a href="djvmcvt.html">djvmcvt.exe</a></strong> - the console utility for
+packing-unpacking the multypage DjVu-files to the separate pages.</p>
+
+<p>- <strong>djvudumpm.exe</strong> - the modified (<a
+href="https://sourceforge.net/forum/forum.php?thread_id=3289524&amp;forum_id=103286">with
+txt file output</a>) console utility <a href="djvudump.html">djvudump</a> - for getting a
+DjVu-book structure information.</p>
+
+<p>- <strong><a href="djvuextract.html">djvuextract.exe</a></strong> - the console utility
+for disassembling single-page DjVu-files into the constituents (chunks).</p>
+
+<p>- <strong><a href="djvumake.html">djvumake.exe</a></strong> - the console utility for
+assembling single-page DjVu-files from the constituents (chunks). Here is used the version
+modified by Alexey Kryukov.</p>
+
+<p>- <strong><a href="djvm.html">djvm.exe</a></strong> - the console utility which
+collects the ready DjVu-pics into a temporary multypage DjVu-file (to show it later when <strong>View</strong>
+button is pressed).</p>
+
+<hr>
+
+<h4>Controls:</h4>
+
+<p>Button <strong>Open file(s)</strong>: Opens and loads the background subscans.</p>
+
+<p><strong>Open folder</strong> - acts analoguously.</p>
+
+<p>Butons <strong>+</strong> (&quot;plus&quot;) и <strong>-</strong> (&quot;minus&quot;)
+- adding new element / deleting current element of the list.</p>
+
+<p><strong>BSF</strong> - Background subsample factor - may have values between 2 and 12.</p>
+
+<p><strong>Background quality</strong> - the quality of the background - may have values
+between 0 and 50.</p>
+
+<p>Switches <strong>All files</strong> / <strong>Current file</strong> - set the usage
+domain for the <strong>BSF</strong> и<strong> Background quality</strong> parameters -
+either for all or for current file (in the list).</p>
+
+<p>Button <strong>С</strong> - resets all the previously set <strong>Current file</strong>
+options and brings them to <strong>All files</strong> mode.</p>
+
+<p>Button <strong>Convert</strong> - launches the process of creation of the DjVu-pics
+group.</p>
+
+<p>Button <strong>View</strong> - shows the encoded DjVu-pics - as a temporary (!)
+multipage DjVu-file - using the installed in your system DjVu-viewer.</p>
+
+<p>Button <strong>Current </strong>- launches encoding and viewing of the current file
+applying the current encoding options. Ideal for seeking for an optimal encoding
+parameters set for a current DjVu-pic. </p>
+
+<p>Button <strong>Insert in DjVu</strong> - automatic insertion of the ready DjVu-pics
+into the corresponding places of the target DjVu-book.</p>
+
+<p>Button <strong>Source</strong> - input here the path to the target DjVu-book (for next
+to come <strong>Insert in DjVu</strong> processing).</p>
+
+<p>Button <strong>Dest</strong> - input or change here the path to the processed copy of
+the target DjVu-book.</p>
+
+<hr>
+
+<h4>Options:</h4>
+
+<p>If you press the <strong>Options</strong> button the options window is opened.</p>
+
+<p>The checkbox with the dropdown <strong>DPI</strong> - on / off and choosing the desired
+DPI value.</p>
+
+<p>The checkbox <strong>Open DjVu-file after converting</strong> - automatical opening of
+the temporary multipage DjVu-file right after the creation of a group of the DjVu-pics
+after pressing the <strong>Convert</strong> button<strong>.</strong></p>
+
+<p>The checkbox <strong>Open DjVu-file after inserting</strong> - automatical opening of
+the copy of the target DjVu-book right after the insertion of a group of the DjVu-pics
+after pressing the <strong>Insert in DjVu</strong> button<strong>.</strong></p>
+
+<p>The checkbox <strong>Output to Desktop</strong> - on / off the automatical forming of
+the output DjVu path to the Desktop.</p>
+
+<p>The field <strong>Output file suffix:</strong> choosing a suffix which is added to the
+copy of a target DjVu-book where the ready DjVu-pics are incorporated.</p>
+
+<p><strong>Custom Filename</strong> - a textual element which is added to the background
+subscan. At this mode the program auto-forms a filename filter which is used when opening
+files or folders.</p>
+
+<p>The checkbox <strong>Recognize Scan Tailor filenames</strong> - on / off the
+automatical recognition of the files from Scan Tailor. When on the program recognizes Scan
+Tailor filenames and traslates them properly to the corresponding file numbers. This
+checkbox is recommended to be always on.</p>
+
+<p><strong>Prefix</strong> - Custom Filename is added before the background subscan name.</p>
+
+<p><strong>Suffix</strong> - Custom Filename is added after the background subscan name.</p>
+
+<p><strong>None </strong>- Any graphical files are accepted while opening, with no
+name-pattern restriction (it is the default value).</p>
+
+<p><em>Notes:</em> </p>
+
+<p>1. The DjVu-pics filenames (without extension and without &quot;sep&quot; suffix (or
+without user-defined prefix-suffix - if available)) must be the substrings of the internal
+DjVu pages filenames (without extension) - in a multypage DjVu-book where these DjVu-pics
+are inserted (otherwise the insertion will not happen). If using ScanKromsator 5.92 this
+is provided automatically. You can check the correctness of these filenames by examining
+the filled <strong>tmp</strong> folder content.</p>
+
+<p>2. It is forbidden to use Custom Filename consisting of digits.</p>
+
+<p>3. Inseting DjVu-pics into an unappropriate DjVu-book causes ether an error or an
+absence of the insertion.</p>
+
+<hr>
+
+<h4>Notes:</h4>
+
+<p>1. All the manually changed program parameters are automatically remembered.</p>
+
+<p>2. The background subscans by default must have the names in thе ScanKromsator 5.92
+notation:</p>
+
+<p>0001.sep.tif, 0002.sep.tif, ..., 0100.sep.tif, ...</p>
+
+<p>3. All the created DjVu files remain to stay in the <strong>tmp</strong> service folder
+after the program is closed. This folder is cleared only at the moment of the creation of
+the new DjVu files.</p>
+
+<p>4. The filenames in the list may be only unique. Adding a file with a doubling name is
+blocked. Every time a file is added the list is auto-sorted. Every file in the list is
+stored with its own path - so it is allowed to form the list by adding files from
+different folders.</p>
+
+<p>5. The program supports Drag-and-Drop both for files and folders.</p>
+
+<p>6. Files with <strong>Current file</strong> option set are marked bold in the filelist.</p>
+
+<p>7. Between <strong>View</strong> and <strong>Current</strong> buttons you can see the
+total filesize of the currently available DjVu-pics. It is auto-updated after every
+encoding.</p>
+
+<p>8. The parameter <strong>Background quality</strong> sets the <strong>-slices</strong>
+option for the <a href="c44.html">c44.exe</a> utility with the following formula:</p>
+
+<p>- Not more than 4 chunks are always used (although the maximum is up to 15 chunks).</p>
+
+<p>- The first chunk is always equal to 70.</p>
+
+<p>- The current slider value is added to the the first chunk value. So the real range of
+the quality regulation is from 70 to 120 (although the maximum is 210 - which does not
+make sense since he quality does not grow after 120).</p>
+
+<p>- The current slider value is distributed evenly among the remaining 3 chunks: it is
+(value) divided to 16 by modulus (with the remainder). The resulting values are set (with
+the remainder) to 3 chunks. In case of value &gt; 48 the second chunk is augmented by 1 or
+2 (to avoid introducing the 5-th chunk).</p>
+
+<p>9. While processing a page in a multypage DjVu-file the foreground chunk is either kept
+(if it is available) or is created &quot;from scratch&quot; (if it is not available), and
+the background chunk (if it is available) is omitted and replaced to the background
+subscan.</p>
+
+<p>10. The pixel sizes of the illustration to be pasted must be equal to the sizes of the
+corresponding pasted-on DjVu-page (or equal to the sizes of its copy subsampled in the
+range 1..12). The subsampled sizes are calculated by the formula from csepdjvu (<a
+href="http://djvu.cvs.sourceforge.net/viewvc/djvu/djvulibre-3.5/tools/csepdjvu.cpp?revision=1.30&amp;view=markup">http://djvu.cvs.sourceforge.net/viewvc/djvu/djvulibre-3.5/tools/csepdjvu.cpp?revision=1.30&amp;view=markup</a>
+lines 1080 and 1081):</p>
+
+<p>int subw = (w + bgred - 1) / bgred;<br>
+int subh = (h + bgred - 1) / bgred;</p>
+
+<p>where subw, subh - the subsampled image sizes<br>
+w, h - the original image sizes<br>
+bgred - the integer subsampling factor (in the range 1..12)</p>
+
+<hr>
+
+<h4>Known program flaws:</h4>
+
+<p>1. When you create a new folder in the Choose folder window the Choose folderс is
+closed automatically and you have to manually reopen it to see the newly created file.
+Possible cause: the treeview node extraction by command possibly does not work properly
+under Win98.</p>
+
+<hr>
+
+<h4>Authors:</h4>
+
+<p><strong>Alexey Kryukov</strong> &lt;anagnost at yandex dot ru&gt;<br>
+<strong>monday2000</strong>.</p>
+
+<p>GUI creation:</p>
+
+<p><strong>monday2000</strong>.</p>
+
+<hr>
+
+<p>03.06.2009.</p>
+
+<p><a target="blank" href="http://www.djvu-soft.narod.ru/">http://www.djvu-soft.narod.ru/</a></p>
+</body>
+</html>

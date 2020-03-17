@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>DJVM</TITLE>
+<style type="text/css">
+<!--
+  OL,UL,P,BODY,TD,TR,TH,FORM { 
+    font-family: verdana,arial,helvetica,sans-serif; font-size:small; 
+    color: #000000; }
+  H1 { font-size: x-large; font-family: verdana,arial,helvetica,sans-serif; }
+  H2 { font-size: large; font-family: verdana,arial,helvetica,sans-serif; }
+  H3 { font-size: medium; font-family: verdana,arial,helvetica,sans-serif; }
+  H4 { font-size: small; font-family: verdana,arial,helvetica,sans-serif; }
+  H5 { font-size: x-small; font-family: verdana,arial,helvetica,sans-serif; }
+  H6 { font-size: xx-small; font-family: verdana,arial,helvetica,sans-serif; }
+--></style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<table width=100% bgcolor="#C0C0E0" border=0 cellspacing=0 cellpadding=0>
+<tr><td valign=middle align=center><h1>DJVM</h1></td></tr>
+</table>
+<p>
+<div style="margin-left: 2cm">
+<H1>DJVM</H1>
+Section: DjVuLibre-3.5 (1)<BR>Updated: 10/11/2001<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+djvm - Manipulate bundled multi-page DjVu documents.
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>&nbsp;&nbsp;&nbsp;Creating a bundled document:</H2>
+
+
+<B>djvm -c[reate] </B><I>doc.djvu</I><B> </B><I>page1.djvu</I><B> ... </B><I>pageN.djvu</I>
+
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>&nbsp;&nbsp;&nbsp;Inserting:</H2>
+
+
+<B>djvm -i[nsert] </B><I>doc.djvu</I><B> </B><I>page.djvu</I><B> [</B><I>pagenum</I><B>]</B>
+
+
+<A NAME="lbAF">&nbsp;</A>
+<H2>&nbsp;&nbsp;&nbsp;Removing:</H2>
+
+
+<B>djvm -d[elete] </B><I>doc.djvu</I><B> </B><I>pagenum</I>
+
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>&nbsp;&nbsp;&nbsp;Listing:</H2>
+
+
+<B>djvm -l[ist] </B><I>doc.djvu</I>
+
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This program creates or modifies a bundled multi-page DjVu document.
+Multi-page bundled documents can be used directly or converted
+to indirect document using command
+<B>djvmcvt</B>.
+
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-c[reate]</B>
+
+<DD>
+Create a bundled DjVu document named
+<I>doc.djvu</I>
+
+by collecting files
+<I>page1.djvu</I>
+
+to 
+<I>pageN.djvu</I>.
+
+<DT><B>-i[nsert]</B>
+
+<DD>
+Modify the bundled DjVu document named
+<I>doc.djvu</I>
+
+by inserting file
+<I>page.djvu</I>
+
+as page
+<I>pagenum</I>.
+
+Omitting argument
+<I>pagenum</I>
+
+means that the page should be appended at the end of the document.
+File 
+<I>page.djvu</I>
+
+also can be a multi-page DjVu document.
+All pages will be inserted at the specified location.
+<DT><B>-d[elete]</B>
+
+<DD>
+Remove page
+<I>pagenum</I>
+
+from the bundled multi-page DjVu document
+<I>doc.djvu</I>.
+
+<DT><B>-l[ist]</B>
+
+<DD>
+List all component files in the multi-page DjVu document
+<I>doc.djvu</I>.
+
+<P>
+</DL>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>CREDITS</H2>
+
+This program was initially written by Andrei Erofeev
+&lt;<A HREF="mailto:andrew_erofeev@yahoo.com">andrew_erofeev@yahoo.com</A>&gt; and was improved by Bill Riemers
+&lt;<A HREF="mailto:docbill@sourceforge.net">docbill@sourceforge.net</A>&gt; and many others.
+<P>
+<A NAME="lbAK">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="/cgi-bin/man/man2html?1+djvu">djvu</A></B>(1),
+
+<B><A HREF="/cgi-bin/man/man2html?1+djvmcvt">djvmcvt</A></B>(1)
+
+<P>
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">&nbsp;&nbsp;&nbsp;Creating a bundled document:</A><DD>
+<DT><A HREF="#lbAE">&nbsp;&nbsp;&nbsp;Inserting:</A><DD>
+<DT><A HREF="#lbAF">&nbsp;&nbsp;&nbsp;Removing:</A><DD>
+<DT><A HREF="#lbAG">&nbsp;&nbsp;&nbsp;Listing:</A><DD>
+<DT><A HREF="#lbAH">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAI">OPTIONS</A><DD>
+<DT><A HREF="#lbAJ">CREDITS</A><DD>
+<DT><A HREF="#lbAK">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 12:53:32 GMT, August 23, 2008
+
+
+</div>
+<p>
+<table width=100% bgcolor="#C0C0E0" border=0 cellspacing=0 cellpadding=3>
+<tr><td valign=middle align=center><h1>DJVM</h1></td></tr>
+</table>
+</BODY>
+</HTML>

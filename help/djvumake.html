@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>DJVUMAKE</TITLE>
+<style type="text/css">
+<!--
+  OL,UL,P,BODY,TD,TR,TH,FORM { 
+    font-family: verdana,arial,helvetica,sans-serif; font-size:small; 
+    color: #000000; }
+  H1 { font-size: x-large; font-family: verdana,arial,helvetica,sans-serif; }
+  H2 { font-size: large; font-family: verdana,arial,helvetica,sans-serif; }
+  H3 { font-size: medium; font-family: verdana,arial,helvetica,sans-serif; }
+  H4 { font-size: small; font-family: verdana,arial,helvetica,sans-serif; }
+  H5 { font-size: x-small; font-family: verdana,arial,helvetica,sans-serif; }
+  H6 { font-size: xx-small; font-family: verdana,arial,helvetica,sans-serif; }
+--></style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<table width=100% bgcolor="#C0C0E0" border=0 cellspacing=0 cellpadding=0>
+<tr><td valign=middle align=center><h1>DJVUMAKE</h1></td></tr>
+</table>
+<p>
+<div style="margin-left: 2cm">
+Section: DjVuLibre-3.5 (1)<BR>Updated: 10/11/2001<BR><A HREF="#index">Index</A>
+<A HREF="index.html">Return to Main Contents</A><HR>
+
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+djvumake - Assemble DjVu image files.
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>djvumake </B><I>djvufile</I><B> [</B><I>chkid</I><B>=</B><I>argument</I><B>]...</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Program
+<B>djvumake</B>
+
+assembles a single-page DjVu file 
+<I>djvufile</I>
+
+by copying or creating chunks according to the provided arguments. 
+Supported arguments are as follows:
+<DL COMPACT>
+<DT><B>INFO=</B><I>w</I><B>,</B><I>h</I><B>,</B><I>dpi</I>
+
+<DD>
+Create the initial information chunk.  Arguments 
+<I>w</I>, <I>h</I>, and <I>dpi</I>
+
+describe the width, height and resolution of the image.  All arguments
+may be omitted.  The default resolution is 300 dpi.  The default width
+and height will be retrieved from the first mask chunk specified in the
+command line options.
+<DT><B>Sjbz=</B><I>jb2file</I>
+
+<DD>
+Create a 
+<FONT SIZE="-1">JB2 </FONT>
+foreground mask chunk.  File 
+<I>jb2file</I>
+
+may contain raw JB2 data, 
+or be a DjVu file containing JB2 data
+such as those produced by program
+<B>cjb2</B>.
+
+<DT><B>Smmr=</B><I>mmrfile</I>
+
+<DD>
+Create a
+<FONT SIZE="-1">MMR/G4 </FONT>
+foreground mask chunk.  File 
+<I>mmrfile</I>
+
+may contain raw MMR data or be a DjVu file 
+containing MMR data.
+<DT><B>BG44=</B><I>iw44file</I><B>[:</B><I>n</I><B>]</B>
+
+<DD>
+Create one or more 
+<FONT SIZE="-1">IW44 </FONT>
+background chunks.  File 
+<I>iw44file </I>
+
+must contain
+<FONT SIZE="-1">IW44 </FONT>
+data.
+Such files can be obtained by compressing the background image
+with program 
+<B>c44</B>
+
+and extracting the raw 
+<FONT SIZE="-1">IW44 </FONT>
+data using program
+<B>djvuextract</B>.
+
+The optional argument
+<I>n</I>
+
+indicates the number of chunks to copy from the IW44 file.
+Omitting the number of chunks copies all available chunks.
+<DT><B>BGjp=</B><I>jpegfile</I>
+
+<DD>
+Create a 
+<FONT SIZE="-1">JPEG</FONT>
+encoded background chunk.
+File 
+<I>jpegfile</I>
+
+must contain 
+<FONT SIZE="-1">JPEG </FONT>
+encoded data.
+<DT><B>BG2k=</B><I>jpegfile</I>
+
+<DD>
+Create a 
+<FONT SIZE="-1">JPEG-2000 </FONT>
+background chunk.
+File
+<I>jpegfile</I>
+
+must contain 
+<FONT SIZE="-1">JPEG-2000</FONT>
+encoded data.
+The DjVu decoder does not yet display
+files containing JPEG-2000 data.
+<DT><B>FGbz=</B><I>bzzfile</I>
+
+<DD>
+Create a foreground color chunk describing one solid color
+for each
+<FONT SIZE="-1">JB2</FONT>
+encoded mark. 
+File
+<I>bzzfile</I>
+
+is best created by extracting the chunk data from an existing
+DjVu file using command 
+<B>djvuextract</B>.
+
+<DT><B>FG44=</B><I>iw44file</I>
+
+<DD>
+Create a 
+<FONT SIZE="-1">IW44 </FONT>
+foreground color chunk.  
+File 
+<I>iw44file </I>
+
+must contain 
+<FONT SIZE="-1">IW44 </FONT>
+data.
+Such files can be obtained by compressing the background image
+with command 
+<B>c44</B>
+
+and extracting the raw 
+<FONT SIZE="-1">IW44 </FONT>
+data using program
+<B>djvuextract</B>.
+
+Only the first chunk is copied.
+<DT><B>FGjp=</B><I>jpegfile</I>
+
+<DD>
+Create a 
+<FONT SIZE="-1">JPEG</FONT>
+foreground color chunk.
+<DT><B>FG2k=</B><I>jpegfile</I>
+
+<DD>
+Create a
+<FONT SIZE="-1">JPEG-2000</FONT>
+foreground color chunk.
+The DjVu decoder does not yet display
+files containing JPEG-2000 data.
+<DT><B>INCL=</B><I>fileid</I>
+
+<DD>
+Create a DjVu3 include chunk pointing to the component file named 
+<I>fileid</I>.
+
+The resulting file should then be included into a 
+multipage document using command 
+<B>djvm</B>.
+
+<DT><B>PPM=</B><I>ppmfile</I>
+
+<DD>
+Create a
+<FONT SIZE="-1">IW44</FONT>
+background chunk and a 
+<FONT SIZE="-1">IW44 </FONT>
+foreground color chunk 
+by masking and subsampling the 
+<FONT SIZE="-1">PPM</FONT>
+file
+<I>ppmfile.</I>
+
+<P>
+Assume, for instance, that we have a 
+<FONT SIZE="-1">PPM </FONT>
+image 
+<B>myimage.ppm</B>
+
+and an identically sized
+<FONT SIZE="-1">PBM</FONT>
+bitonal image 
+<B>mymask.pbm</B>
+
+whose black pixels indicate which pixels belong to the foreground.  
+Such a bitonal file might have been obtained by thresholding 
+or color-keying the 
+<FONT SIZE="-1">PPM </FONT>
+image. We can then produce a DjVuDocument image using the
+following two commands:
+<DT><DD>
+<B>cjb2 mymask.pbm mymask.djvu</B>
+
+<BR>
+
+<B>djvumake my.djvu Sjbz=mymask.djvu PPM=myimage.ppm</B>
+
+<BR>
+
+<BR>
+
+</DL>
+<P>
+
+Please refer to the DjVu specification (
+<B><A HREF="http://www.djvuzone.org/djvu/djvu/djvuspec/">http://www.djvuzone.org/djvu/djvu/djvuspec/</A></B>
+
+) for more information about the composition of a legal 
+DjVu image file.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>CREDITS</H2>
+
+This program was written by L'eon Bottou &lt;<A HREF="mailto:leonb@users.sourceforge.net">leonb@users.sourceforge.net</A>&gt; and
+was then improved by Andrei Erofeev &lt;<A HREF="mailto:andrew_erofeev@yahoo.com">andrew_erofeev@yahoo.com</A>&gt;, Bill Riemers
+&lt;<A HREF="mailto:docbill@sourceforge.net">docbill@sourceforge.net</A>&gt; and many others.
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="djvu.html">djvu</A></B>(1),
+
+<B><A HREF="djvuextract.html">djvuextract</A></B>(1),
+
+<B><A HREF="cjb2.html">cjb2</A></B>(1),
+
+<B><A HREF="c44.html">c44</A></B>(1)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">CREDITS</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="../index.html">man2html</A>,
+using the manual pages.<BR>
+<<<<<<< djvumake.html
+Time: 20:25:28 GMT, August 21, 2004
+=======
+Time: 00:49:53 GMT, July 12, 2005
+>>>>>>> 1.18
+
+
+</div>
+<p>
+<table width=100% bgcolor="#C0C0E0" border=0 cellspacing=0 cellpadding=3>
+<tr><td valign=middle align=center><h1>DJVUMAKE</h1></td></tr>
+</table>
+</BODY>
+</HTML>
