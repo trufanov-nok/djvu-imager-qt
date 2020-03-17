@@ -28,23 +28,45 @@ find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
 set(TS_FILES DjVu_Imager-Qt_ru_RU.ts)
 
-if(ANDROID)
-  add_library(DjVu_Imager-Qt SHARED
+qt5_add_resources(RESOURCES "res/appicon.qrc")
+
+set(SOURCES
     main.cpp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    qmytablewidget.cpp
+    optionsdialog.cpp
+    optionsdialog.h
+    optionsdialog.ui
+    progressdialog.cpp
+    progressdialog.h
+    progressdialog.ui
+    qconvertthread.cpp
+    qconvertthread.h
+    pageparam.h
+    qviewthread.cpp
+    qviewthread.h
+    qinsertthread.cpp
+    qinsertthread.h
+    utils.cpp
+    utils.h
+    )
+
+if(ANDROID)
+  add_library(DjVu_Imager-Qt SHARED
+    ${SOURCES}
     ${TS_FILES}
+    ${RESOURCES}
   )
 else()
   add_executable(DjVu_Imager-Qt
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    ${SOURCES}
     ${TS_FILES}
+    ${RESOURCES}
   )
 endif()
+
 
 target_link_libraries(DjVu_Imager-Qt PRIVATE Qt5::Widgets)
 
