@@ -4,7 +4,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="607"/>
         <source>DjVu Imager</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14,146 +14,147 @@
         <translation type="unfinished">Введите файл(ы):</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="56"/>
-        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.ui" line="68"/>
         <source>Filename</source>
         <translation type="unfinished">Имя файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="61"/>
-        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.ui" line="73"/>
         <source>#</source>
         <translation type="unfinished">№</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="80"/>
+        <location filename="../mainwindow.ui" line="95"/>
         <source>Open file(s)</source>
         <translation type="unfinished">Открыть файл(ы)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="87"/>
+        <location filename="../mainwindow.ui" line="102"/>
         <source>Open folder</source>
         <translation type="unfinished">Открыть папку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="113"/>
+        <location filename="../mainwindow.ui" line="128"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="126"/>
+        <location filename="../mainwindow.ui" line="141"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="135"/>
+        <location filename="../mainwindow.ui" line="150"/>
         <source>Parameters:</source>
         <translation type="unfinished">Параметры:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="150"/>
+        <location filename="../mainwindow.ui" line="165"/>
         <source>BSF</source>
         <translation type="unfinished">ДЗФ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="162"/>
+        <location filename="../mainwindow.ui" line="177"/>
         <source>Background quality</source>
         <translation type="unfinished">Качество задн. фона</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="213"/>
+        <location filename="../mainwindow.ui" line="228"/>
         <source>Apply to:</source>
         <translation type="unfinished">Применить к:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="238"/>
+        <location filename="../mainwindow.ui" line="253"/>
+        <location filename="../mainwindow.cpp" line="149"/>
         <source>All files</source>
         <translation type="unfinished">Все файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
+        <location filename="../mainwindow.ui" line="276"/>
         <source>Current file</source>
         <translation type="unfinished">Текущий файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="287"/>
+        <location filename="../mainwindow.ui" line="302"/>
         <source>Clear all page specific settings</source>
         <translation type="unfinished">Сбросить все специфичные для страниц параметры на значения по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="290"/>
+        <location filename="../mainwindow.ui" line="305"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="312"/>
+        <location filename="../mainwindow.ui" line="327"/>
         <source>Convert</source>
         <translation type="unfinished">Пуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="319"/>
+        <location filename="../mainwindow.ui" line="334"/>
         <source>View</source>
         <translation type="unfinished">Просмотр</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="349"/>
+        <location filename="../mainwindow.ui" line="364"/>
         <source>Current</source>
         <translation type="unfinished">Текущий</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="370"/>
+        <location filename="../mainwindow.ui" line="385"/>
         <source>Insert in DjVu</source>
         <translation type="unfinished">Вставить в DjVu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="390"/>
+        <location filename="../mainwindow.ui" line="405"/>
         <source>Options</source>
         <translation type="unfinished">Опции</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="397"/>
+        <location filename="../mainwindow.ui" line="412"/>
         <source>Help</source>
         <translation type="unfinished">Помощь</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="421"/>
+        <location filename="../mainwindow.ui" line="436"/>
         <source>Source</source>
         <translation type="unfinished">Источн.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="437"/>
+        <location filename="../mainwindow.ui" line="452"/>
         <source>Dest</source>
         <translation type="unfinished">Назнач.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="114"/>
+        <location filename="../mainwindow.cpp" line="119"/>
         <source>eng.htm</source>
         <translation type="unfinished">rus.htm</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="116"/>
-        <location filename="../mainwindow.cpp" line="118"/>
+        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="459"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="116"/>
+        <location filename="../mainwindow.cpp" line="133"/>
         <source>Help file not found!</source>
         <translation type="unfinished">Файл помощи не найден!</translation>
     </message>
     <message>
-        <source>Can&apos;t find an application to open %s</source>
-        <translation type="obsolete">Не удается найти приложение для открытия %1</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="147"/>
         <source>SK v5.91 background subscans</source>
         <translation type="unfinished">СК v5.91 задние субсканы</translation>
     </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>All images</source>
+        <translation type="unfinished">Все изображения</translation>
+    </message>
     <message numerus="yes">
-        <location filename="../mainwindow.cpp" line="209"/>
-        <location filename="../mainwindow.cpp" line="212"/>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="204"/>
+        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="214"/>
         <source>File removal</source>
         <translation type="unfinished">
             <numerusform>Удаление файла</numerusform>
@@ -162,78 +163,83 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="204"/>
         <source>Please select a file or files to remove from the list.
 The files on drive will be kept.</source>
         <translation type="unfinished">Пожалуйста, выберите один или несколько файлов для удаления из списка.
 Файлы на диске не будут удалены.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="243"/>
+        <location filename="../mainwindow.cpp" line="244"/>
         <source>DjVu files</source>
         <translation type="unfinished">DjVu файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="400"/>
         <source>Conversion</source>
         <translation type="unfinished">Конверсия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
-        <location filename="../mainwindow.cpp" line="486"/>
+        <location filename="../mainwindow.cpp" line="404"/>
+        <location filename="../mainwindow.cpp" line="493"/>
         <source>Can&apos;t remove folder %1</source>
         <translation type="unfinished">Не удается удалить папку %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
-        <location filename="../mainwindow.cpp" line="491"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="505"/>
         <source>Can&apos;t create folder %1</source>
         <translation type="unfinished">Не удается создать папку %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="441"/>
         <source>%1 KiB</source>
         <translation type="unfinished">%1 КиБ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="443"/>
         <source>%1 MiB</source>
         <translation type="unfinished">%1 МиБ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="464"/>
+        <location filename="../mainwindow.cpp" line="459"/>
+        <source>Please select the page in the list which converted version should be displayed</source>
+        <translation type="unfinished">Пожалуйста, выберите страницу, сконвертированное изображение которой вы хотите увидеть</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="471"/>
         <source>Insertion</source>
         <translation type="unfinished">Вставка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="468"/>
+        <location filename="../mainwindow.cpp" line="475"/>
         <source>No DjVu file is chosen or wrong DjVu filename.</source>
         <translation type="unfinished">Не выбран DjVu-файл или неправильное имя DjVu-файла.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="472"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>The file &quot;%1&quot; is not found.</source>
         <translation type="unfinished">Файл &quot;%1&quot; не найден.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="486"/>
         <source>Output DjVu file has wrong filename.</source>
         <translation type="unfinished">Выходной DjVu-файл имеет неправильное имя.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="213"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>Remove the file &quot;%1&quot; from the list?</source>
         <oldsource>Remove the file &quot;%s&quot; from the list?</oldsource>
         <translation type="unfinished">Удалить файл &quot;%1&quot; из списка?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="118"/>
+        <location filename="../mainwindow.cpp" line="135"/>
         <source>Can&apos;t find an application to open %1</source>
         <translation type="unfinished">Не удается найти приложение для открытия %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="215"/>
         <source>Remove %1 file(s) from the list?</source>
         <oldsource>Remove %n file(s) from the list?</oldsource>
         <translation type="unfinished">
@@ -287,39 +293,48 @@ The files on drive will be kept.</source>
         <translation type="unfinished">Язык интерфейса:</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="171"/>
-        <source>Custom Filename</source>
-        <translation type="unfinished">Произвольные файлы</translation>
+        <location filename="../optionsdialog.ui" line="169"/>
+        <source>Custom RegExp to retrieve page number from filename:</source>
+        <translation type="unfinished">Изменить RegExp для извлечения номеров страниц из имен файлов:</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="178"/>
-        <source>Recognize Scan Tailor filenames</source>
-        <translation type="unfinished">Узнавать имена файлов Scan Tailor</translation>
+        <location filename="../optionsdialog.ui" line="183"/>
+        <source>RegExp:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="187"/>
-        <source>Background</source>
-        <translation type="unfinished">Задний фон</translation>
+        <location filename="../optionsdialog.ui" line="197"/>
+        <source>Group:</source>
+        <translation type="unfinished">Группа:</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="195"/>
-        <source>Filename addon:</source>
-        <translation type="unfinished">Добавка к имени:</translation>
+        <location filename="../optionsdialog.ui" line="224"/>
+        <source>Test</source>
+        <translation type="unfinished">Тест</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="229"/>
-        <source>Prefix</source>
-        <translation type="unfinished">Приставка</translation>
+        <location filename="../optionsdialog.ui" line="235"/>
+        <source>00016.sep.tiff
+Image01_page19.jpg
+p17.png
+page10
+0124_01.jpg</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="236"/>
-        <source>Suffix</source>
-        <translation type="unfinished">Суффикс</translation>
+        <location filename="../optionsdialog.ui" line="280"/>
+        <source>Reset to default RegExp</source>
+        <translation type="unfinished">Сбросить настройки RegExp на значения по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="243"/>
-        <source>None</source>
-        <translation type="unfinished">Нет</translation>
+        <location filename="../optionsdialog.cpp" line="161"/>
+        <source>page #: %1</source>
+        <translation type="unfinished">страница №: %1</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.cpp" line="163"/>
+        <source>&lt;error&gt;</source>
+        <translation type="unfinished">&lt;ошибка&gt;</translation>
     </message>
 </context>
 <context>
@@ -381,22 +396,31 @@ The files on drive will be kept.</source>
         <source>Can&apos;t find an application to open %1</source>
         <translation type="unfinished">Не удается найти приложение для открытия %1</translation>
     </message>
-    <message>
-        <source>Can&apos;t find an application to open %s</source>
-        <translation type="obsolete">Не удается найти приложение для открытия %1</translation>
-    </message>
 </context>
 <context>
     <name>QInsertThread</name>
     <message>
-        <location filename="../qinsertthread.cpp" line="309"/>
+        <location filename="../qinsertthread.cpp" line="310"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../qinsertthread.cpp" line="309"/>
+        <location filename="../qinsertthread.cpp" line="310"/>
         <source>Can&apos;t find an application to open %1</source>
         <translation type="unfinished">Не удается найти приложение для открытия %1</translation>
+    </message>
+</context>
+<context>
+    <name>QMyTableWidget</name>
+    <message>
+        <location filename="../qmytablewidget.cpp" line="105"/>
+        <source>Filename</source>
+        <translation type="unfinished">Имя файла</translation>
+    </message>
+    <message>
+        <location filename="../qmytablewidget.cpp" line="105"/>
+        <source>#</source>
+        <translation type="unfinished">№</translation>
     </message>
 </context>
 <context>
@@ -404,9 +428,9 @@ The files on drive will be kept.</source>
     <message>
         <location filename="../qinsertthread.cpp" line="105"/>
         <location filename="../qinsertthread.cpp" line="120"/>
-        <location filename="../qinsertthread.cpp" line="128"/>
-        <location filename="../qinsertthread.cpp" line="153"/>
-        <location filename="../qinsertthread.cpp" line="193"/>
+        <location filename="../qinsertthread.cpp" line="129"/>
+        <location filename="../qinsertthread.cpp" line="154"/>
+        <location filename="../qinsertthread.cpp" line="194"/>
         <location filename="../utils.cpp" line="19"/>
         <location filename="../utils.cpp" line="41"/>
         <location filename="../utils.cpp" line="54"/>
@@ -433,17 +457,17 @@ Processing aborted.</source>
 Вставка прервана.</translation>
     </message>
     <message>
-        <location filename="../qinsertthread.cpp" line="129"/>
+        <location filename="../qinsertthread.cpp" line="130"/>
         <source>The file &quot;%1&quot; is not found.</source>
         <translation type="unfinished">Файл &quot;%1&quot; не найден.</translation>
     </message>
     <message>
-        <location filename="../qinsertthread.cpp" line="154"/>
+        <location filename="../qinsertthread.cpp" line="155"/>
         <source>The page &quot;%1&quot; is not found in the dumped DjVu structure.</source>
         <translation type="unfinished">Страница &quot;%1&quot; не найдена в составе DjVu документа.</translation>
     </message>
     <message>
-        <location filename="../qinsertthread.cpp" line="194"/>
+        <location filename="../qinsertthread.cpp" line="195"/>
         <source>The size of the illustration #%1 (%2x%3) isn&apos;t proportional to the size of the corresponding pasted-on DjVu-page (%4x%5).
 
 Processing aborted.</source>
@@ -506,10 +530,6 @@ Value: %2</source>
         <location filename="../qviewthread.cpp" line="56"/>
         <source>Can&apos;t find an application to open %1</source>
         <translation type="unfinished">Не удается найти приложение для открытия %1</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find an application to open %s</source>
-        <translation type="obsolete">Не удается найти приложение для открытия %1</translation>
     </message>
 </context>
 </TS>
