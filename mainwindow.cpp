@@ -112,10 +112,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnHelp_clicked()
 {
-    QString main_help_file = QApplication::applicationDirPath() + "/help/" + tr("eng.htm");
-    if (!QFile::exists(main_help_file)) {
+    const QString fname = tr("eng.htm");
+    QString main_help_file = qApp->applicationDirPath() + "/help/" + fname;
+
+    bool found = QFile::exists(main_help_file);
+    if (!found) {
+        main_help_file = QString::fromUtf8(HELP_DIR_ABS) + "/" + fname;
+        found = QFile::exists(main_help_file);
+        if (!found) {
+            main_help_file = QString::fromUtf8(HELP_DIR_REL) + "/" + fname;
+            found = QFile::exists(main_help_file);
+        }
+    }
+
+    if (!found) {
         QMessageBox::critical(this, tr("Error"), tr("Help file not found!"));
-    } else if (!QDesktopServices::openUrl(QUrl("file://" + main_help_file))) {
+    } else if (!QDesktopServices::openUrl(QUrl(main_help_file))) {
         QMessageBox::critical(this, tr("Error"), tr("Can't find an application to open %1").arg(main_help_file));
     }
 }

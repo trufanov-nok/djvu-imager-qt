@@ -32,10 +32,13 @@ INCLUDE(cmake/UpdateTranslations.cmake)
 # Prepare config.h
 IF(WIN32)
         SET(TRANSLATIONS_DIR_REL "languages")
+	SET(HELP_DIR_REL "help")
 ELSE(WIN32)
         SET(TRANSLATIONS_DIR_REL "share/djvu_imager-qt/languages")
+	SET(HELP_DIR_REL "share/djvu_imager-qt/help")
 ENDIF(WIN32)
 SET(TRANSLATIONS_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${TRANSLATIONS_DIR_REL}")
+SET(HELP_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${HELP_DIR_REL}")
 
 CONFIGURE_FILE(config.h.in ${CMAKE_BINARY_DIR}/config.h @ONLY)
 
