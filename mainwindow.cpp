@@ -298,7 +298,7 @@ void MainWindow::loadDefaultPageSetting()
 {
     m_defaultPageSetting.reqBSF = m_settings.value("all_reqBSF", true).toBool();
     m_defaultPageSetting.valBSF = m_settings.value("all_valBSF", 2).toInt();
-    m_defaultPageSetting.reqBackg = m_settings.value("all_reqBackg", true).toBool();
+    m_defaultPageSetting.reqBackg = m_settings.value("all_reqBackg", false).toBool();
     m_defaultPageSetting.valBackg = m_settings.value("all_valBackg", 8).toInt();
 }
 
