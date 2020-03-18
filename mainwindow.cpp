@@ -455,6 +455,10 @@ void MainWindow::on_btnView_clicked()
 void MainWindow::on_btnCurrent_clicked()
 {
     const QMap<int, QString> filesToPages = ui->tblFiles->currentToFilePathsData();
+    if (filesToPages.isEmpty()) {
+        QMessageBox::critical(this, tr("Error"), tr("Please select the page in the list which converted version should be displayed"));
+        return;
+    }
     QConvertThread* thread = new QConvertThread(this, m_defaultPageSetting, m_customPageSettings,
                           filesToPages, &m_settings, m_tmpImagesFolder);
     thread->setCurrentConversion(true);
