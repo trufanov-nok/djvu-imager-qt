@@ -19,8 +19,12 @@ AppSettings::AppSettings():
 
 OptionsDialog::OptionsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::OptionsDialog),
-    m_settings(QApplication::applicationDirPath() + "/settings.ini", QSettings::IniFormat)
+    ui(new Ui::OptionsDialog)
+    #if defined(Q_OS_WIN)
+    , m_settings(QApplication::applicationDirPath() + "/settings.ini")
+    #else
+    , m_settings("DjVu Imager") // use default folder to store ini file
+    #endif
 {
     ui->setupUi(this);
 

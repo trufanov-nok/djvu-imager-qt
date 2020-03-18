@@ -22,7 +22,11 @@ MainWindow* MainWindow::_top_widget_ = nullptr;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_settings(QApplication::applicationDirPath() + "/settings.ini", QSettings::IniFormat)
+    #if defined(Q_OS_WIN)
+    , m_settings(QApplication::applicationDirPath() + "/settings.ini")
+    #else
+    , m_settings("DjVu Imager") // use default folder to store ini file
+    #endif
     , m_currentPageSetting(&m_defaultPageSetting)
 {
     MainWindow::_top_widget_ = this;
