@@ -1,4 +1,4 @@
-[DEBREATE-0.7.13-dev17]
+[DEBREATE-0.7.12]
 <<CTRL>>
 Package: djvu-imager-qt
 Version: 2.9.a
@@ -17,21 +17,22 @@ Description: A tool for inserting image layers into multipage DjVu documents byp
  multipage DjVu document that was encoded without image layers at all.
  This allows to bypass mistakes that DjVu encoders might made during
  segmentation.
+
 <</CTRL>>
 <<FILES>>
 1
-/home/truf/dev/pl/DjVu_Imager-Qt/res/DjVu Sep.ico -> DjVu Sep.ico -> /usr/share/pixmaps
-/home/truf/dev/pl/DjVu_Imager-Qt/help/rus.htm -> rus.htm -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/eng.htm -> eng.htm -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/djvumake.html -> djvumake.html -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/djvuextract.html -> djvuextract.html -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/djvudump.html -> djvudump.html -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/djvmcvt.html -> djvmcvt.html -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/djvm.html -> djvm.html -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/help/c44.html -> c44.html -> /usr/share/djvu_imager-qt/help
-/home/truf/dev/pl/DjVu_Imager-Qt/build/DjVu_Imager-Qt_ru.qm -> DjVu_Imager-Qt_ru.qm -> /usr/share/djvu_imager-qt/languages
-/home/truf/dev/pl/DjVu_Imager-Qt/build/DjVu_Imager-Qt* -> DjVu_Imager-Qt -> /usr/bin
 /home/truf/dev/pl/DjVu_Imager-Qt/build/fi_c44* -> fi_c44 -> /usr/bin
+/home/truf/dev/pl/DjVu_Imager-Qt/build/DjVu_Imager-Qt* -> DjVu_Imager-Qt -> /usr/bin
+/home/truf/dev/pl/DjVu_Imager-Qt/build/DjVu_Imager-Qt_ru.qm -> DjVu_Imager-Qt_ru.qm -> /usr/share/djvu_imager-qt/languages
+/home/truf/dev/pl/DjVu_Imager-Qt/help/c44.html -> c44.html -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/djvm.html -> djvm.html -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/djvmcvt.html -> djvmcvt.html -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/djvudump.html -> djvudump.html -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/djvuextract.html -> djvuextract.html -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/djvumake.html -> djvumake.html -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/eng.htm -> eng.htm -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/help/rus.htm -> rus.htm -> /usr/share/djvu_imager-qt/help
+/home/truf/dev/pl/DjVu_Imager-Qt/res/DjVu Sep.png -> DjVu Sep.png -> /usr/share/pixmaps
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
@@ -70,7 +71,7 @@ Name=DjVu Imager
 Version=1.0
 Exec=DjVu_Imager-Qt
 Comment=Insert image layers into DjVu documents
-Icon=DjVu Sep.ico
+Icon=DjVu Sep.png
 Type=Application
 Terminal=false
 StartupNotify=true
@@ -81,5 +82,4 @@ Categories=Graphics;Scanning;
 1
 1
 1
-strip
 <</BUILD>>
