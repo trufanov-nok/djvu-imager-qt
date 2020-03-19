@@ -154,3 +154,7 @@ and the progress bar was not filled to the end.
 v 2.9:
 
 - a bug fixed: a DjVu with the FG44 chunk was treated improperly.
+
+v 2.9.a:
+
+- a port from MFC to Qt 5.x to support non-Windows systems.
