@@ -49,13 +49,22 @@ bool execute_with_work_dir_hack(const QString& cmd, const QString& work_dir)
 
 bool execute(const QString& cmd)
 {
-    int res = system(cmd.toStdString().c_str());
+    QProcess proc;
+    int res = -1;
+    proc.setProcessChannelMode(QProcess::ProcessChannelMode::SeparateChannels);
+    proc.start(cmd);
+    proc.waitForFinished(-1);
+    if (proc.exitStatus() == QProcess::NormalExit) {
+        res = proc.exitCode();
+    }
     if (res != 0) {
         emit MainWindow::_top_widget_->error(QObject::tr("Error"),
                                              QObject::tr("Command execution:\n%1\nreturn %2")
                                              .arg(cmd)
                                              .arg(res));
     }
+
+
     return res == 0;
 }
 
