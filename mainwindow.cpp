@@ -277,8 +277,13 @@ void MainWindow::on_btnSourceDjVu_clicked()
                     }
                 }
 
+                dest_path = QDir::toNativeSeparators(dest_path);
+                if (!dest_path.endsWith(QDir::separator())) {
+                    dest_path += QDir::separator();
+                }
+
                 QString new_dest =
-                        dest_path + QDir::separator() + fi.baseName()
+                        dest_path + fi.baseName()
                         + QString(".%1.").arg(new_suffix)
                         + fi.completeSuffix();
                 if (new_dest != ui->edSourceDjVu->text()) { //might be the same if suffix is empty and folders match
@@ -296,10 +301,10 @@ void MainWindow::on_btnDestDjVu_clicked()
         dir = QApplication::applicationDirPath();
     }
 
-    const QString selected_dir = QFileDialog::getExistingDirectory(
+    const QString selected_dir = QFileDialog::getSaveFileName(
                 this, QString(), dir);
     if (!selected_dir.isEmpty()) {
-        ui->edDestDjVu->setText(selected_dir);
+        ui->edDestDjVu->setText(QDir::toNativeSeparators(selected_dir));
     }
 }
 
