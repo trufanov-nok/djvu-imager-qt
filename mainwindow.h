@@ -21,9 +21,10 @@ class MainWindow : public QMainWindow
 
     void loadDefaultPageSetting();
     void saveDefaultPageSetting();
-    void displayPageSetting(PageSetting &val);
+    void setCurrentPageSetting(PageSetting &val);
     void displayDefaultPageSetting();
-    void propagetePageSettingsChanges();
+    PageSetting getPageSettingVal() const;
+    void propagetePageSettingsChangesToSelectedPages();
     void updateTmpFolderSize();
 private:
     bool loadLanguage(const QString& dir, const QString& lang);

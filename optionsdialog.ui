@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>505</width>
-    <height>381</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -232,7 +232,7 @@
         <item>
          <widget class="QPlainTextEdit" name="teDemoSrc">
           <property name="plainText">
-           <string>00016.sep.tiff
+           <string notr="true">00016.sep.tiff
 Image01_page19.jpg
 p17.png
 page10
@@ -254,6 +254,9 @@ page10
           </property>
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+          <property name="plainText">
+           <string notr="true"/>
           </property>
          </widget>
         </item>

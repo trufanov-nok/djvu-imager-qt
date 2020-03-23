@@ -38,26 +38,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->cbBSF, &QCheckBox::stateChanged, [=](int val) {
         ui->comboBSF->setEnabled(val);
-        m_currentPageSetting->reqBSF = val;
-        propagetePageSettingsChanges();
+        propagetePageSettingsChangesToSelectedPages();
     });
 
     connect(ui->cbBkgQuality, &QCheckBox::stateChanged, [=](int val) {
         ui->valBkgQuality->setEnabled(val);
         ui->lblBkgQuality->setEnabled(val);
-        m_currentPageSetting->reqBackg = val;
-        propagetePageSettingsChanges();
+        propagetePageSettingsChangesToSelectedPages();
     });
 
     connect(ui->valBkgQuality, &QSlider::valueChanged, [=](int val) {
         ui->lblBkgQuality->setText(QString::number(val));
-        m_currentPageSetting->valBackg = val;
-        propagetePageSettingsChanges();
+        propagetePageSettingsChangesToSelectedPages();
     });
 
-    connect(ui->comboBSF, &QComboBox::currentTextChanged, [=](const QString &val) {
-        m_currentPageSetting->valBSF = val.toInt();
-        propagetePageSettingsChanges();
+    connect(ui->comboBSF, &QComboBox::currentTextChanged, [=](const QString &/*val*/) {
+        propagetePageSettingsChangesToSelectedPages();
     });
 
     connect(ui->tblFiles, &QMyTableWidget::signalRowCountChanged, [=](int cnt) {
@@ -67,6 +63,16 @@ MainWindow::MainWindow(QWidget *parent)
         ui->gbApplyTo->setEnabled(cnt);
         ui->gbButtons->setEnabled(cnt);
         ui->btnInsert->setEnabled(cnt);
+    });
+
+    connect(ui->tblFiles, &QMyTableWidget::pageWasChanged, [=](int old_page, int new_page) {
+        if (m_customPageSettings.contains(old_page)) {
+            PageSetting* old_set = &m_customPageSettings[old_page];
+            m_customPageSettings[new_page] = *old_set;
+            if (old_set == m_currentPageSetting) {
+                m_currentPageSetting = &m_customPageSettings[new_page];
+            }
+        }
     });
 
 
@@ -157,6 +163,11 @@ void MainWindow::addOrOpenFiles(bool isOpen)
             ui->tblFiles->displayTableItems(files, isOpen);
         }
         m_lastOpenPath = QDir(files[0]).path();
+
+        if (isOpen) {
+            on_btnClear_clicked();
+            ui->rbAll->setChecked(true);
+        }
     }
 }
 
@@ -176,7 +187,11 @@ void MainWindow::on_btnOpenFolder_clicked()
     if (!selected_dir.isEmpty()) {
         QDir dir(selected_dir);
 
-        QStringList files = dir.entryList(QDir::Files);
+        QStringList files;
+        for (QFileInfo fi: dir.entryInfoList(QDir::Files)) {
+            files.append(fi.absoluteFilePath());
+        }
+
         if (!files.isEmpty()) {
             if (m_settings.value("customRegexp", false).toBool()) {
                 ui->tblFiles->displayTableItems(files, true, m_settings.value("regexp", ".*?([0-9]+).*?").toString(),
@@ -186,6 +201,9 @@ void MainWindow::on_btnOpenFolder_clicked()
             }
         }
         m_lastOpenPath = selected_dir;
+
+        on_btnClear_clicked();
+        ui->rbAll->setChecked(true);
     }
 }
 
@@ -310,8 +328,12 @@ void MainWindow::saveDefaultPageSetting()
     m_settings.setValue("all_valBackg", m_defaultPageSetting.valBackg);
 }
 
-void MainWindow::displayPageSetting(PageSetting& val)
+void MainWindow::setCurrentPageSetting(PageSetting& val)
 {
+    for (QWidget* w: ui->gbParameters->findChildren<QWidget *>()) {
+        w->blockSignals(true);
+    }
+
     m_currentPageSetting = &val;
     ui->cbBSF->setChecked(val.reqBSF);
     ui->comboBSF->setCurrentIndex(
@@ -319,19 +341,33 @@ void MainWindow::displayPageSetting(PageSetting& val)
                 );
     ui->cbBkgQuality->setChecked(val.reqBackg);
     ui->valBkgQuality->setValue(val.valBackg);
+
+    for (QWidget* w: ui->gbParameters->findChildren<QWidget *>()) {
+        w->blockSignals(false);
+    }
+}
+
+PageSetting MainWindow::getPageSettingVal() const
+{
+    PageSetting val;
+    val.reqBSF = ui->cbBSF->isChecked();
+    val.valBSF = ui->comboBSF->currentText().toInt();
+    val.reqBackg = ui->cbBkgQuality->isChecked();
+    val.valBackg = ui->valBkgQuality->value();
+    return val;
 }
 
 void MainWindow::displayDefaultPageSetting()
 {
-    displayPageSetting(m_defaultPageSetting);
+    setCurrentPageSetting(m_defaultPageSetting);
 }
 
 void MainWindow::on_rbAll_clicked()
 {
     displayDefaultPageSetting();
     for (QTableWidgetItem* it: ui->tblFiles->selectedItems()) {
-        if (it->column() == 1) {
-            int page = it->text().toInt();
+        if (it->column() == 0) { // just to make sure
+            int page = ui->tblFiles->getPage(it->row());
             m_customPageSettings.remove(page);
         }
     }
@@ -341,14 +377,15 @@ void MainWindow::on_rbAll_clicked()
 
 void MainWindow::on_rbCurrent_clicked()
 {
+    PageSetting sett = getPageSettingVal();
+
     PageSetting* new_current = nullptr;
     int current_row = ui->tblFiles->currentRow();
     for (QTableWidgetItem* it: ui->tblFiles->selectedItems()) {
-        if (it->column() == 1) {
-            int page = it->text().toInt();
-            if (!m_customPageSettings.contains(page)) {
-                m_customPageSettings[page] = *m_currentPageSetting;
-            }
+        if (it->column() == 0) { // just to make sure
+            int page = ui->tblFiles->getPage(it->row());
+            m_customPageSettings[page] = sett;
+
             if (it->row() == current_row) {
                 new_current = &m_customPageSettings[page];
             }
@@ -364,34 +401,27 @@ void MainWindow::on_rbCurrent_clicked()
 
 void MainWindow::on_btnClear_clicked()
 {
+    displayDefaultPageSetting();
     m_customPageSettings.clear();
     ui->tblFiles->clearHighlight();
 }
 
-void MainWindow::propagetePageSettingsChanges()
+void MainWindow::propagetePageSettingsChangesToSelectedPages()
 {
-    if (m_currentPageSetting != &m_defaultPageSetting) { //rbCustom is on
-        for (QTableWidgetItem* it: ui->tblFiles->selectedItems()) {
-            if (it->column() == 1) {
-                int page = it->text().toInt();
-                if (m_customPageSettings.contains(page)) {
-                    m_customPageSettings[page] = *m_currentPageSetting;
-                }
-            }
-        }
+    if (ui->rbCurrent->isChecked()) {
+        on_rbCurrent_clicked();
+    } else {
+        *m_currentPageSetting = getPageSettingVal();
     }
 }
 
 void MainWindow::on_tblFiles_currentCellChanged(int currentRow, int /*currentColumn*/, int /*previousRow*/, int /*previousColumn*/)
 {
-    QTableWidgetItem* it = ui->tblFiles->item(currentRow, 1);
-    if (it) {
-        int page = it->text().toInt();
-        if (m_customPageSettings.contains(page)) {
-            displayPageSetting(m_customPageSettings[page]);
-        } else {
-            displayDefaultPageSetting();
-        }
+    int page = ui->tblFiles->getPage(currentRow);
+    if (m_customPageSettings.contains(page)) {
+        setCurrentPageSetting(m_customPageSettings[page]);
+    } else {
+        displayDefaultPageSetting();
     }
 }
 

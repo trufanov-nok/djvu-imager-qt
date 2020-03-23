@@ -1,9 +1,13 @@
 #include "qmytablewidget.h"
 #include <QLineEdit>
 #include <QFileInfo>
+#include <QMessageBox>
 
 QMyTableWidget::QMyTableWidget(QWidget *parent): QTableWidget(parent)
 {
+    connect(this, &QMyTableWidget::currentCellChanged, [=](){
+        m_oldPage = getCurrentPage();
+    });
 }
 
 void QMyTableWidget::rowCountChanged(int oldCount, int newCount)
@@ -15,12 +19,10 @@ void QMyTableWidget::rowCountChanged(int oldCount, int newCount)
 void QMyTableWidget::clearHighlight()
 {
     for (int i = 0; i < rowCount(); i++) {
-        for (int j = 0; j < columnCount(); j++) {
-            QTableWidgetItem* it = item(i,j);
-            QFont f = it->font();
-            f.setBold(false);
-            it->setFont(f);
-        }
+        QTableWidgetItem* it = item(i,0);
+        QFont f = it->font();
+        f.setBold(false);
+        it->setFont(f);
     }
 }
 
@@ -39,7 +41,7 @@ QMap<int, QString> QMyTableWidget::pagesToFilePathsData() const
 {
     QMap<int, QString> res;
     for (int r = 0; r < rowCount(); r++) {
-        int page = qobject_cast<QLineEdit*>(cellWidget(r,1))->text().toInt();
+        int page = getPage(r);
         res[page] = item(r,0)->data(Qt::UserRole).toString();
     }
     return res;
@@ -50,7 +52,7 @@ QMap<int, QString> QMyTableWidget::currentToFilePathsData() const
     QMap<int, QString> res;
     int r = currentRow();
     if (r >= 0) {
-        int page = qobject_cast<QLineEdit*>(cellWidget(r,1))->text().toInt();
+        int page = getPage(r);
         res[page] = item(r,0)->data(Qt::UserRole).toString();
     }
 
@@ -96,8 +98,8 @@ void QMyTableWidget::displayTableItems(const QStringList& files, bool clear, con
             tableline->setFrame(false);
             tableline->setText(col2);
             tableline->setValidator( new MyIntRangeValidator(1, 999999, this) );
-//            connect(tableline, &QLineEdit::editingFinished)
-//            setItem(new_row, 1, new QTableWidgetItem( col2 ));
+            connect(tableline, &QLineEdit::editingFinished, this, &QMyTableWidget::verifyPageChange);
+
             setCellWidget(new_row, 1, tableline);
         }
     }
@@ -128,4 +130,42 @@ QValidator::State MyIntRangeValidator::validate(QString &s, int &) const
     }
 }
 
+int QMyTableWidget::getPage(int row, int col) const
+{
+    return qobject_cast<QLineEdit*>(cellWidget(row, col))->text().toInt();
+}
 
+void QMyTableWidget::setPage(int val, int row, int col)
+{
+    qobject_cast<QLineEdit*>(cellWidget(row, col))->setText(QString::number(val));
+}
+
+int QMyTableWidget::getCurrentPage() const
+{
+    int row = currentRow();
+    if (row > 0) {
+        return getPage(row);
+    }
+    return -1;
+}
+
+void QMyTableWidget::verifyPageChange()
+{
+    QLineEdit* editor = qobject_cast<QLineEdit*>(sender());
+    if (!editor || !editor->isModified()) { // in some cases editingFinished may be fired twice
+        return;
+    } else {
+        editor->setModified(false);
+    }
+
+    int new_page = getCurrentPage();
+    for (int i = 0; i < rowCount(); i++) {
+        if (i != currentRow() && new_page == getPage(i)) {
+            QMessageBox::critical(this, tr("Error"), tr("The page %1 already exists in the list").arg(new_page));
+            setPage(m_oldPage, currentRow());
+            return;
+        }
+    }
+    emit pageWasChanged(m_oldPage, new_page);
+    m_oldPage = new_page;
+}
