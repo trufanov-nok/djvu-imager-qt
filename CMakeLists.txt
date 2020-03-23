@@ -106,11 +106,30 @@ ADD_CUSTOM_TARGET(compile_translations ALL DEPENDS ${QM_FILES})
 
 INSTALL(FILES ${QM_FILES} DESTINATION "${TRANSLATIONS_DIR_REL}/")
 
+IF(WIN32)
 
+SET(win32_resource_file "")
+SET(rc_file "${CMAKE_SOURCE_DIR}/res/winicon.rc")
+FILE(GLOB win32_resources res/*.ico)
+SET_SOURCE_FILES_PROPERTIES(
+    "${rc_file}" PROPERTIES
+    OBJECT_DEPENDS ${win32_resources}
+    )
+SET(win32_resource_file "${rc_file}")
+
+
+add_executable(DjVu_Imager-Qt WIN32
+    ${SOURCES}
+    ${TS_FILES}
+    ${RESOURCES}
+    ${win32_resource_file}
+  )
+ELSE(WIN32)
 add_executable(DjVu_Imager-Qt
     ${SOURCES}
     ${TS_FILES}
     ${RESOURCES}
   )
+ENDIF(WIN32)
 
 target_link_libraries(DjVu_Imager-Qt PRIVATE Qt5::Widgets)
