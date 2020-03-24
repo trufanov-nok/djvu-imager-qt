@@ -52,7 +52,8 @@ set(SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    qmytablewidget.cpp
+    qmytableview.cpp
+    qmytableview.h
     optionsdialog.cpp
     optionsdialog.h
     optionsdialog.ui

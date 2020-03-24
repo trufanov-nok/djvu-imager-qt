@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_settings("DjVu Imager") // use default folder to store ini file
     #endif
     , m_currentPageSetting(&m_defaultPageSetting)
+    , m_preventPropagation(false)
 {
     MainWindow::_top_widget_ = this;
     connect(this, &MainWindow::error, this, &MainWindow::displayError);
@@ -56,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
         propagetePageSettingsChangesToSelectedPages();
     });
 
-    connect(ui->tblFiles, &QMyTableWidget::signalRowCountChanged, [=](int cnt) {
+    connect(ui->tblFiles, &QMyTableView::signalRowCountChanged, [=](int cnt) {
         ui->btnRemoveFiles->setEnabled(cnt);
         ui->gbPaths->setEnabled(cnt);
         ui->gbParameters->setEnabled(cnt);
@@ -65,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->btnInsert->setEnabled(cnt);
     });
 
-    connect(ui->tblFiles, &QMyTableWidget::pageWasChanged, [=](int old_page, int new_page) {
+    connect(ui->tblFiles, &QMyTableView::pageWasChanged, [=](int old_page, int new_page) {
         if (m_customPageSettings.contains(old_page)) {
             PageSetting* old_set = &m_customPageSettings[old_page];
             m_customPageSettings[new_page] = *old_set;
@@ -214,16 +215,20 @@ void MainWindow::on_btnAddFiles_clicked()
 
 void MainWindow::on_btnRemoveFiles_clicked()
 {
+    if (!ui->tblFiles->selectionModel()->hasSelection()) {
+        return;
+    }
     // only 1st column items are reported as cellWidget is in 2nd one
-    const QList<QTableWidgetItem*> list = ui->tblFiles->selectedItems();
+    const QModelIndexList list = ui->tblFiles->selectionModel()->selectedRows();
     const int row_cnt = list.count();
 
     if (!row_cnt) {
         QMessageBox::information(this, tr("File removal", nullptr, 1), tr("Please select a file or files to remove from the list.\nThe files on drive will be kept."));
         return;
     } else if (row_cnt == 1){
+        const QString fname = ui->tblFiles->model()->data(list[0]).toString();
         if (QMessageBox::question(this, tr("File removal", nullptr, 1),
-                                  tr("Remove the file \"%1\" from the list?").arg(list[0]->text()),
+                                  tr("Remove the file \"%1\" from the list?").arg(fname),
                                   QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel) {
             return;
         }
@@ -237,17 +242,14 @@ void MainWindow::on_btnRemoveFiles_clicked()
     }
 
     QList<int> rows;
-    for (const QTableWidgetItem* item: list) {
-        if (item->column() == 0) { // just to make sure
-            rows.append(item->row());
+    for (const QModelIndex item: list) {
+        if (item.column() == 0) { // just to make sure
+            rows.append(item.row());
         }
     }
 
-    qSort(rows.begin(), rows.end(),  qGreater<int>());
-    for (int row: rows) {
-        ui->tblFiles->removeRow(row);
-    }
-
+    ui->tblFiles->removeRows(rows);
+    ui->tblFiles->selectionModel()->clearSelection();
 }
 
 void MainWindow::on_btnSourceDjVu_clicked()
@@ -257,10 +259,10 @@ void MainWindow::on_btnSourceDjVu_clicked()
         dir = QApplication::applicationDirPath();
     }
 
-    const QString file = QFileDialog::getOpenFileName(
+    const QString file = QDir::toNativeSeparators(QFileDialog::getOpenFileName(
                 this, QString(), dir,
                 tr("DjVu files") + " (*.djvu *.djv)"
-                );
+                ));
 
     if (!file.isEmpty()) {
         ui->edSourceDjVu->setText(file);
@@ -335,9 +337,7 @@ void MainWindow::saveDefaultPageSetting()
 
 void MainWindow::setCurrentPageSetting(PageSetting& val)
 {
-    for (QWidget* w: ui->gbParameters->findChildren<QWidget *>()) {
-        w->blockSignals(true);
-    }
+    m_preventPropagation = true;
 
     m_currentPageSetting = &val;
     ui->cbBSF->setChecked(val.reqBSF);
@@ -347,9 +347,7 @@ void MainWindow::setCurrentPageSetting(PageSetting& val)
     ui->cbBkgQuality->setChecked(val.reqBackg);
     ui->valBkgQuality->setValue(val.valBackg);
 
-    for (QWidget* w: ui->gbParameters->findChildren<QWidget *>()) {
-        w->blockSignals(false);
-    }
+    m_preventPropagation = false;
 }
 
 PageSetting MainWindow::getPageSettingVal() const
@@ -370,11 +368,9 @@ void MainWindow::displayDefaultPageSetting()
 void MainWindow::on_rbAll_clicked()
 {
     displayDefaultPageSetting();
-    for (QTableWidgetItem* it: ui->tblFiles->selectedItems()) {
-        if (it->column() == 0) { // just to make sure
-            int page = ui->tblFiles->getPage(it->row());
-            m_customPageSettings.remove(page);
-        }
+    for (QModelIndex it: ui->tblFiles->selectionModel()->selectedRows()) {
+        int page = ui->tblFiles->getPage(it.row());
+        m_customPageSettings.remove(page);
     }
 
     ui->tblFiles->highlightSelectedItems(false);
@@ -385,15 +381,13 @@ void MainWindow::on_rbCurrent_clicked()
     PageSetting sett = getPageSettingVal();
 
     PageSetting* new_current = nullptr;
-    int current_row = ui->tblFiles->currentRow();
-    for (QTableWidgetItem* it: ui->tblFiles->selectedItems()) {
-        if (it->column() == 0) { // just to make sure
-            int page = ui->tblFiles->getPage(it->row());
-            m_customPageSettings[page] = sett;
+    int current_row = ui->tblFiles->currentIndex().row();
+    for (QModelIndex it: ui->tblFiles->selectionModel()->selectedRows()) {
+        int page = ui->tblFiles->getPage(it.row());
+        m_customPageSettings[page] = sett;
 
-            if (it->row() == current_row) {
-                new_current = &m_customPageSettings[page];
-            }
+        if (it.row() == current_row) {
+            new_current = &m_customPageSettings[page];
         }
     }
 
@@ -413,6 +407,10 @@ void MainWindow::on_btnClear_clicked()
 
 void MainWindow::propagetePageSettingsChangesToSelectedPages()
 {
+    if (m_preventPropagation) {
+        return;
+    }
+
     if (ui->rbCurrent->isChecked()) {
         on_rbCurrent_clicked();
     } else {
@@ -446,7 +444,7 @@ void MainWindow::on_btnConvert_clicked()
     }
 
     ProgressDialog dlg(this);
-    dlg.setMaximum(ui->tblFiles->rowCount());
+    dlg.setMaximum(ui->tblFiles->model()->rowCount());
 
     const QMap<int, QString> filesToPages = ui->tblFiles->pagesToFilePathsData();
     QConvertThread thread(this, m_defaultPageSetting, m_customPageSettings,
@@ -544,7 +542,7 @@ void MainWindow::on_btnInsert_clicked()
 
 
     ProgressDialog dlg(this);
-    dlg.setMaximum(ui->tblFiles->rowCount());
+    dlg.setMaximum(ui->tblFiles->model()->rowCount());
     dlg.setInsertion(true);
 
     const QMap<int, QString> filesToPages = ui->tblFiles->pagesToFilePathsData();

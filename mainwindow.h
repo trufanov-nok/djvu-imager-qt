@@ -88,6 +88,7 @@ private:
     QString m_current_lang;
     QTranslator m_translator;
     QTranslator m_qt_translator;
+    bool m_preventPropagation;
 };
 
 

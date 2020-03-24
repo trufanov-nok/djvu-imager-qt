@@ -29,7 +29,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QMyTableWidget" name="tblFiles">
+        <widget class="QMyTableView" name="tblFiles">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -54,28 +54,15 @@
          <property name="gridStyle">
           <enum>Qt::DotLine</enum>
          </property>
-         <attribute name="horizontalHeaderMinimumSectionSize">
-          <number>5</number>
-         </attribute>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
-         <attribute name="verticalHeaderHighlightSections">
+         <attribute name="verticalHeaderCascadingSectionResizes">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderShowSortIndicator" stdset="0">
           <bool>false</bool>
          </attribute>
-         <column>
-          <property name="text">
-           <string>Filename</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>#</string>
-          </property>
-          <property name="textAlignment">
-           <set>AlignLeading|AlignVCenter</set>
-          </property>
-         </column>
         </widget>
        </item>
        <item>
@@ -480,9 +467,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QMyTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header>qmytablewidget.h</header>
+   <class>QMyTableView</class>
+   <extends>QTableView</extends>
+   <header>qmytableview.h</header>
   </customwidget>
  </customwidgets>
  <resources>
