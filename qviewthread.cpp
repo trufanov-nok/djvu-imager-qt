@@ -52,7 +52,7 @@ void QViewThread::run()
         return;
     }
 
-    if (!QDesktopServices::openUrl(QUrl("file://" + view_file))) {
+    if (!QDesktopServices::openUrl(QUrl(view_file))) {
         emit MainWindow::_top_widget_->error(tr("Error"), tr("Can't find an application to open %1").arg(view_file));
     }
 

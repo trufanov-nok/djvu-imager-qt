@@ -306,7 +306,7 @@ void QInsertThread::run()
     emit progress(max_pages);
 
     if (m_openAfterInsert) {
-        if (!QDesktopServices::openUrl(QUrl("file://" + m_destDjVu))) {
+        if (!QDesktopServices::openUrl(QUrl(m_destDjVu))) {
             emit MainWindow::_top_widget_->error(tr("Error"), tr("Can't find an application to open %1").arg(m_destDjVu));
         }
     }
