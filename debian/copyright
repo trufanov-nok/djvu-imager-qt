@@ -1,0 +1,7 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://github.com/trufanov-nok/djvu-imager-qt
+
+Files: *
+Copyright: 2009-2019 Alexey Kryukov <monday2000@yandex.ru>
+           2020-2021 Alexander Trufanov <trufanovan@gmail.com>
+License: GPL-2+

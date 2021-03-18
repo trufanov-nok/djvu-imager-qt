@@ -134,3 +134,15 @@ add_executable(djvu-imager-qt
 ENDIF(WIN32)
 
 target_link_libraries(djvu-imager-qt PRIVATE Qt5::Widgets)
+
+
+IF(NOT WIN32 AND NOT APPLE)
+        INSTALL(FILES res/djvu-imager-qt.png DESTINATION "/usr/share/pixmaps/")
+        INSTALL(FILES debian/djvu-imager-qt.desktop DESTINATION "/usr/share/applications/")
+ENDIF(NOT WIN32 AND NOT APPLE)
+
+IF(APPLE)
+        INSTALL(TARGETS djvu-imager-qt BUNDLE DESTINATION . RUNTIME DESTINATION bin)
+ELSE(APPLE)
+        INSTALL(TARGETS djvu-imager-qt RUNTIME DESTINATION bin)
+ENDIF(APPLE)

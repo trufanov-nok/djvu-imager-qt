@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="appicon">DjVu Sep.ico</file>
+        <file alias="appicon">djvu-imager-qt.ico</file>
     </qresource>
 </RCC>

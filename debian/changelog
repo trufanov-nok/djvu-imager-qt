@@ -1,0 +1,5 @@
+djvu-imager-qt (2.9.b-0ubuntu1) bionic; urgency=medium
+
+  * First release on launchpad. fi_c44 renamed to c44-fi
+
+ -- Alexander Trufanov <trufanovan@gmail.com>  Thu, 18 Mar 2021 15:00:00 +0300

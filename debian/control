@@ -1,0 +1,16 @@
+Source: djvu-imager-qt
+Section: graphics
+Priority: optional
+Maintainer: Alexander Trufanov <trufanovan@gmail.com>
+Build-Depends: debhelper-compat (= 9), libgcc1 (>=1.3.0), libc6 (>=2.14), libstdc++6 (>=5.2), cmake (>=2.8.9), qtbase5-dev (>=5.4), qttools5-dev (>=5.4)
+Standards-Version: 4.5.0
+Homepage: https://github.com/trufanov-nok/djvu-imager-qt
+Rules-Requires-Root: no
+
+Package: djvu-imager-qt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, djvulibre-bin (>=3.5.0), c44-freeimage (>=3.5.0)
+Description: Inserts illustrations into DjVu doccument.
+ DjVu Imager creates the hi quality grey or color illustrations
+ in a DjVu-book. It is based on the combination of the
+ background glueing and mask coloring methods.

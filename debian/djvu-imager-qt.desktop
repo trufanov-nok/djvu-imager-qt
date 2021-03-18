@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=DjVu Imager
+Version=1.0
+Exec=djvu-imager-qt %f
+Comment=Insert illustrations into DjVu document
+Icon=djvu-imager-qt.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Graphics;Scanning;
