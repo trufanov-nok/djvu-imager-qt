@@ -10,7 +10,7 @@ The subscans pairs are suggested to be created in the ScanKromsator or ScanTailo
 
 **DjVu Imager** is licensed under "GPL 2 and later" and has the open sourcecodes.
 
-DjVu Imager utilizes a free programmatic graphical library [FreeImage](http://freeimage.sourceforge.net/) (under GPL) and several console tools from [DjVuLibre](http://djvu.sourceforge.net/) project.
+DjVu Imager utilizes several console tools from [DjVuLibre](http://djvu.sourceforge.net/) project.
 
 ## The workflow outline:
 

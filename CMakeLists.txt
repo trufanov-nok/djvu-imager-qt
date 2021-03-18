@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(DjVu_Imager-Qt LANGUAGES CXX)
+project(djvu-imager-qt LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -34,8 +34,8 @@ IF(WIN32)
         SET(TRANSLATIONS_DIR_REL "languages")
 	SET(HELP_DIR_REL "help")
 ELSE(WIN32)
-        SET(TRANSLATIONS_DIR_REL "share/djvu_imager-qt/languages")
-	SET(HELP_DIR_REL "share/djvu_imager-qt/help")
+        SET(TRANSLATIONS_DIR_REL "share/djvu-imager-qt/languages")
+        SET(HELP_DIR_REL "share/djvu-imager-qt/help")
 ENDIF(WIN32)
 SET(TRANSLATIONS_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${TRANSLATIONS_DIR_REL}")
 SET(HELP_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${HELP_DIR_REL}")
@@ -73,13 +73,13 @@ set(SOURCES
 
 # Translations
 TRANSLATION_SOURCES(
-        DjVu_Imager
+        DjVu-Imager
 	${SOURCES}
 )
-FILE(GLOB TRANSLATION_FILES languages/DjVu_Imager-Qt_*.ts)
+FILE(GLOB TRANSLATION_FILES languages/djvu-imager-qt_*.ts)
 
-FINALIZE_TRANSLATION_SET(DjVu_Imager ${TRANSLATION_FILES})
-UPDATE_TRANSLATIONS_TARGET(update_translations DjVu_Imager)
+FINALIZE_TRANSLATION_SET(DjVu-Imager ${TRANSLATION_FILES})
+UPDATE_TRANSLATIONS_TARGET(update_translations DjVu-Imager)
 
 SET(ts_files ${TRANSLATION_FILES})
 
@@ -119,18 +119,18 @@ SET_SOURCE_FILES_PROPERTIES(
 SET(win32_resource_file "${rc_file}")
 
 
-add_executable(DjVu_Imager-Qt WIN32
+add_executable(djvu-imager-qt WIN32
     ${SOURCES}
     ${TS_FILES}
     ${RESOURCES}
     ${win32_resource_file}
   )
 ELSE(WIN32)
-add_executable(DjVu_Imager-Qt
+add_executable(djvu-imager-qt
     ${SOURCES}
     ${TS_FILES}
     ${RESOURCES}
   )
 ENDIF(WIN32)
 
-target_link_libraries(DjVu_Imager-Qt PRIVATE Qt5::Widgets)
+target_link_libraries(djvu-imager-qt PRIVATE Qt5::Widgets)

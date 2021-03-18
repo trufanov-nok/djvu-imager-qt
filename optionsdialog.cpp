@@ -113,7 +113,7 @@ void OptionsDialog::initLanguageList(QString cur_lang)
     ui->comboLang->clear();
     ui->comboLang->addItem("English", "en");
 
-    const QStringList language_file_filter("DjVu_Imager-Qt_*.qm");
+    const QStringList language_file_filter("djvu-imager-qt_*.qm");
     QStringList fileNames = QDir().entryList(language_file_filter);
 
     if (fileNames.isEmpty()) {

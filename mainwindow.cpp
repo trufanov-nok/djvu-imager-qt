@@ -99,8 +99,8 @@ MainWindow::MainWindow(QWidget *parent)
 #ifdef __linux__
     QStringList tmp_paths = QStandardPaths::standardLocations(QStandardPaths::TempLocation);
     if (!tmp_paths.isEmpty()) {
-        m_tmpImagesFolder = tmp_paths[0] + "/djvu_imager_tmp/"; // overwrite with "/tmp"
-        m_tmpFileFolder= tmp_paths[0] + "/djvu_imager_tmp_files/";
+        m_tmpImagesFolder = tmp_paths[0] + "/djvu-imager_tmp/"; // overwrite with "/tmp"
+        m_tmpFileFolder= tmp_paths[0] + "/djvu-imager_tmp_files/";
     }
 #endif
 
@@ -572,7 +572,7 @@ void MainWindow::displayError(const QString& title, const QString& text) {
 bool
 MainWindow::loadLanguage(const QString& dir, const QString& lang)
 {
-    const QString translation("DjVu_Imager-Qt_" + lang);
+    const QString translation("djvu-imager-qt_" + lang);
     bool loaded = m_translator.load(dir + translation);
 
 #if defined(unix) || defined(__unix__) || defined(__unix)
