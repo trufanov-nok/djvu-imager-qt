@@ -482,8 +482,8 @@ Processing aborted.</source>
     </message>
     <message>
         <location filename="../utils.cpp" line="21"/>
-        <source>Can&apos;t find fi_c44 encoder.</source>
-        <translation type="unfinished">Не удается найти кодировщик fi_c44.</translation>
+        <source>Can&apos;t find c44-fi encoder.</source>
+        <translation type="unfinished">Не удается найти кодировщик c44-fi.</translation>
     </message>
     <message>
         <location filename="../utils.cpp" line="42"/>

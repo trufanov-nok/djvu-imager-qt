@@ -21,7 +21,7 @@ Description: A tool for inserting image layers into multipage DjVu documents byp
 <</CTRL>>
 <<FILES>>
 1
-/home/truf/dev/pl/DjVu_Imager-Qt/build/fi_c44* -> fi_c44 -> /usr/bin
+/home/truf/dev/pl/DjVu_Imager-Qt/build/c44-fi* -> c44-fi -> /usr/bin
 /home/truf/dev/pl/DjVu_Imager-Qt/build/DjVu_Imager-Qt* -> DjVu_Imager-Qt -> /usr/bin
 /home/truf/dev/pl/DjVu_Imager-Qt/build/DjVu_Imager-Qt_ru.qm -> DjVu_Imager-Qt_ru.qm -> /usr/share/djvu_imager-qt/languages
 /home/truf/dev/pl/DjVu_Imager-Qt/help/c44.html -> c44.html -> /usr/share/djvu_imager-qt/help

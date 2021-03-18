@@ -27,8 +27,8 @@ QConvertThread::QConvertThread(QObject *parent, const PageSetting& defaultPageSe
 void QConvertThread::run()
 {
 
-    QString fi_c44 = Utils::findExecutable("fi_c44");
-    if (fi_c44.isEmpty()) {
+    const QString c44_fi = Utils::findExecutable("c44-fi");
+    if (c44_fi.isEmpty()) {
         return;
     }
 
@@ -44,9 +44,9 @@ void QConvertThread::run()
     for(QMap<int, QString>::const_iterator it = m_filesToPages.constBegin();
         it != m_filesToPages.constEnd(); ++it) {
 
-        QString command_line = fi_c44;
+        QString command_line = c44_fi;
 
-        int page = it.key();
+        const int page = it.key();
         curSetting = m_customPageSettings.contains(page) ?
                     m_customPageSettings[page] : m_defaultPageSetting;
 

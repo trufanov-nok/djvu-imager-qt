@@ -44,7 +44,7 @@ The DjVu Imager - is just a GUI controlling the console executables taken from D
 
 Utilities in use:
 
-* fi_c44 - the modified (with FreeImage support) console utility **с44** (for the DjVu-pics creation). In this port its crossplatform adaptation is used. The project and sources are [here](https://github.com/trufanov-nok/fi_c44-multiplatform)
+* c44-fi (former fi_c44) - the modified (with FreeImage support) console encoder **с44** (for the DjVu-pics creation). This port uses its crossplatform adaptation. The project and sources are [here](https://github.com/trufanov-nok/c44-freeimage)
 
 - djvmcvt - the console utility for packing-unpacking the multypage DjVu-files to the separate pages.
 
@@ -57,7 +57,7 @@ Utilities in use:
 - djvm - the console utility which collects the ready DjVu-pics into a temporary multypage DjVu-file (to show it later when View button is pressed).
 
 
-The Qt port uses up-to-date non-modified version of DjVuLibre tools, except for fi_c44.
+The Qt port uses up-to-date non-modified version of DjVuLibre tools, except for c44-fi.
 
 For more details please check help files.
 

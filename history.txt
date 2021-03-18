@@ -158,3 +158,7 @@ v 2.9:
 v 2.9.a:
 
 - a port from MFC to Qt 5.x to support non-Windows systems.
+
+v 2.9.b:
+
+- some changes as fi_c44 was renamed to c44-fi

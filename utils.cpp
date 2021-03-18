@@ -17,8 +17,8 @@ QString findExecutable(const QString& name)
         exec = QStandardPaths::findExecutable(name); // search in system paths
         if (exec.isEmpty()) {
             emit MainWindow::_top_widget_->error(QObject::tr("Error"),
-                                                 name != "fi_c44" ? QObject::tr("Can't find %1 executable. Please install DjVuLibre.").arg(name) :
-                                                                    QObject::tr("Can't find fi_c44 encoder."));
+                                                 name != "c44-fi" ? QObject::tr("Can't find %1 executable. Please install DjVuLibre.").arg(name) :
+                                                                    QObject::tr("Can't find c44-fi encoder."));
         }
     }
     return exec;
