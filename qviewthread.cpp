@@ -47,7 +47,7 @@ void QViewThread::run()
         files.append("\"" + fname + "\"");
     }
 
-    QString command_line = QString("%1 -c %2 %3").arg(djvm).arg(view_file).arg(files.join(" "));
+    QString command_line = QString("%1 -c %2 %3").arg(djvm, view_file, files.join(" "));
     if (!Utils::execute(command_line)) {
         return;
     }

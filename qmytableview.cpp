@@ -119,7 +119,8 @@ void QMyTableView::highlightSelectedItems(bool set)
     QMyTableModel* m = qobject_cast<QMyTableModel*> (model());
 
     QList<ItemData>& data = m->getData();
-    for (const QModelIndex i: selectionModel()->selectedRows()) {
+    const QModelIndexList mlist = selectionModel()->selectedRows();
+    for (const QModelIndex& i: mlist) {
         data[i.row()].marked = set;
     }
 
@@ -132,7 +133,8 @@ QMap<int, QString> QMyTableView::pagesToFilePathsData() const
 {
     QMap<int, QString> res;
 
-    for (const ItemData d: qobject_cast<QMyTableModel*> (model())->getData()) {
+    const QList<ItemData>& ilist = qobject_cast<QMyTableModel*> (model())->getData();
+    for (const ItemData& d: ilist) {
         res[d.page] = d.filename;
     }
 
@@ -152,7 +154,8 @@ QMap<int, QString> QMyTableView::currentToFilePathsData() const
 QStringList QMyTableView::filePathsData() const
 {
     QStringList res;
-    for (const ItemData d: qobject_cast<QMyTableModel*> (model())->getData()) {
+    const QList<ItemData>& ilist = qobject_cast<QMyTableModel*> (model())->getData();
+    for (const ItemData& d: ilist) {
         res.append(d.filename);
     }
     return res;
@@ -193,7 +196,7 @@ void QMyTableView::displayTableItems(const QStringList& files, bool clear, const
 
     m->endResetModel();
 
-    signalRowCountChanged(model()->rowCount());
+    emit signalRowCountChanged(model()->rowCount());
 }
 
 MyIntRangeValidator::MyIntRangeValidator(int bottom, int top, QObject *parent) :

@@ -65,8 +65,7 @@ void QConvertThread::run()
         fi.setFile(*it);
         const QString dest_file = m_out_path + fi.completeBaseName() + ".djv";
         command_line += QString(" \"%1\" \"%2\" ")
-                .arg(*it)
-                .arg(dest_file);
+                .arg(*it, dest_file);
 
         if (!Utils::execute(command_line)) {
             return;

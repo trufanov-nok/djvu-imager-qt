@@ -109,8 +109,7 @@ bool execute(const QString& cmd, int& result)
         if (!is_ok) {
             emit MainWindow::_top_widget_->error(QObject::tr("Error"),
                                                  QObject::tr("Incorrect value in stdout for command:\n%1\nValue: %2")
-                                                 .arg(cmd)
-                                                 .arg(stdOut));
+                                                 .arg(cmd, stdOut));
         }
         return is_ok;
     }
@@ -141,8 +140,7 @@ bool execute(const QString& cmd, int& width, int& height)
 
         if (!ok) {
             emit MainWindow::_top_widget_->error(QObject::tr("Error"), QObject::tr("Incorrect value in stdout for command:\n%1\nValue: %2")
-                                                 .arg(cmd)
-                                                 .arg(stdOut));
+                                                 .arg(cmd, stdOut));
         }
         return ok;
     }

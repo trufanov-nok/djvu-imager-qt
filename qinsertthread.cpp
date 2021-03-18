@@ -59,8 +59,7 @@ void QInsertThread::run()
         return;
     }
 
-    QString command_line = QString("\"%1\" -e \"dump\" \"%2\"").arg(djvused)
-            .arg(m_sourceDjVu);
+    QString command_line = QString("\"%1\" -e \"dump\" \"%2\"").arg(djvused, m_sourceDjVu);
 
     QStringList dump_list;
     if (!Utils::execute(command_line, dump_list)) {
@@ -76,9 +75,7 @@ void QInsertThread::run()
         return;
     }
 
-    command_line = QString("\"%1\" -i \"%2\" \"%3\" index.djvu").arg(djvmcvt)
-            .arg(m_sourceDjVu)
-            .arg(m_tmpFilesDir);
+    command_line = QString("\"%1\" -i \"%2\" \"%3\" index.djvu").arg(djvmcvt, m_sourceDjVu, m_tmpFilesDir);
 
 
     if (!Utils::execute(command_line)) {
@@ -96,14 +93,14 @@ void QInsertThread::run()
     }
 
     int max_pages = 0;
-    command_line = QString("\"%1\" -e \"n\" %2").arg(djvused).arg(m_sourceDjVu);
+    command_line = QString("\"%1\" -e \"n\" %2").arg(djvused, m_sourceDjVu);
     if (!Utils::execute(command_line, max_pages)) {
         return;
     }
 
     if (max_pages <= 0) {
         emit MainWindow::_top_widget_->error(QObject::tr("Error"),
-                              QObject::tr("The file \"%1\" contains insorrect number of pages: %2.")
+                              QObject::tr("The file \"%1\" contains incorrect number of pages: %2.")
                               .arg(m_sourceDjVu).arg(max_pages));
         return;
     }
@@ -135,7 +132,7 @@ void QInsertThread::run()
         bool is_fg44 = false, is_fgbz = false, is_sjbz = false;
         int djvu_image_width = 0, djvu_image_height = 0;
 
-        command_line = QString("\"%1\" -e \"size\" \"%2\"").arg(djvused).arg(tmpImage);
+        command_line = QString("\"%1\" -e \"size\" \"%2\"").arg(djvused, tmpImage);
         if (!Utils::execute(command_line, djvu_image_width, djvu_image_height)) {
             return;
         }
@@ -143,7 +140,7 @@ void QInsertThread::run()
         ////////////////////////////
         //
         // Extract BG44 chunk from the current DjVu-pic:
-        command_line = QString("\"%1\" \"%2\" BG44=\"%3\"").arg(djvuextract).arg(tmpImage).arg(m_tmpFilesDir + "BG44.cnk");
+        command_line = QString("\"%1\" \"%2\" BG44=\"%3\"").arg(djvuextract, tmpImage, m_tmpFilesDir + "BG44.cnk");
         if (!Utils::execute(command_line)) {
             return;
         }
@@ -228,19 +225,17 @@ void QInsertThread::run()
                 QRegularExpressionMatch m = rex.match(dump_list[i]);
                 const QString chunk = m.captured(1);
                 command_line2 += QString("\"%1=%2%3.cnk\" ")
-                        .arg(chunk).arg(m_tmpFilesDir).arg(chunk);
+                        .arg(chunk, m_tmpFilesDir, chunk);
             }
         }
 
         ////////////////////////////
         //
-        // djvuextact main file page:
+        // djvuextract main file page:
 
         if (!command_line2.isEmpty()) {
             command_line = QString("\"%1\" \"%2\" %3")
-                    .arg(djvuextract)
-                    .arg(temp_djvu)
-                    .arg(command_line2);
+                    .arg(djvuextract, temp_djvu, command_line2);
 
             if (!Utils::execute(command_line)) {
                 return;
@@ -252,17 +247,16 @@ void QInsertThread::run()
         // djvumake it back
 
         command_line = QString("\"%1\" \"%2\" ")
-                .arg(djvumake)
-                .arg(temp_djvu);
+                .arg(djvumake, temp_djvu);
 
         if (!is_sjbz) {// the illustration is pasted on an empty page
             // fixing the bug with different DPI's
-            QString cmd = QString("\"%1\" -e \"set-dpi %2\" -s \"%3\" ").arg(djvused).arg(src_dpi).arg(tmpImage);
+            QString cmd = QString("\"%1\" -e \"set-dpi %2\" -s \"%3\" ").arg(djvused, src_dpi, tmpImage);
             if (!Utils::execute(cmd)) {
                 return;
             }
 
-            cmd = QString("\"%1\" \"%2\" BG44=\"%3\"").arg(djvuextract).arg(tmpImage).arg(m_tmpFilesDir + "BG44.cnk");
+            cmd = QString("\"%1\" \"%2\" BG44=\"%3\"").arg(djvuextract, tmpImage, m_tmpFilesDir + "BG44.cnk");
             if (!Utils::execute(cmd)) {
                 return;
             }
@@ -297,9 +291,7 @@ void QInsertThread::run()
     //  converting multi-page DjVu document to the bundled multi-page format:
 
     command_line = QString("\"%1\" -b \"%2\" \"%3\"")
-            .arg(djvmcvt)
-            .arg(m_tmpFilesDir+"index.djvu")
-            .arg(m_destDjVu);
+            .arg(djvmcvt, m_tmpFilesDir+"index.djvu", m_destDjVu);
     if (!Utils::execute(command_line)) {
         return;
     }

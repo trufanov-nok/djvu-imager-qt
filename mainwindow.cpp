@@ -37,27 +37,27 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateWindowTitle();
 
-    connect(ui->cbBSF, &QCheckBox::stateChanged, [=](int val) {
+    connect(ui->cbBSF, &QCheckBox::stateChanged, this, [=](int val) {
         ui->comboBSF->setEnabled(val);
         propagetePageSettingsChangesToSelectedPages();
     });
 
-    connect(ui->cbBkgQuality, &QCheckBox::stateChanged, [=](int val) {
+    connect(ui->cbBkgQuality, &QCheckBox::stateChanged, this, [=](int val) {
         ui->valBkgQuality->setEnabled(val);
         ui->lblBkgQuality->setEnabled(val);
         propagetePageSettingsChangesToSelectedPages();
     });
 
-    connect(ui->valBkgQuality, &QSlider::valueChanged, [=](int val) {
+    connect(ui->valBkgQuality, &QSlider::valueChanged, this, [=](int val) {
         ui->lblBkgQuality->setText(QString::number(val));
         propagetePageSettingsChangesToSelectedPages();
     });
 
-    connect(ui->comboBSF, &QComboBox::currentTextChanged, [=](const QString &/*val*/) {
+    connect(ui->comboBSF, &QComboBox::currentTextChanged, this, [=](const QString &/*val*/) {
         propagetePageSettingsChangesToSelectedPages();
     });
 
-    connect(ui->tblFiles, &QMyTableView::signalRowCountChanged, [=](int cnt) {
+    connect(ui->tblFiles, &QMyTableView::signalRowCountChanged, this, [=](int cnt) {
         ui->btnRemoveFiles->setEnabled(cnt);
         ui->gbPaths->setEnabled(cnt);
         ui->gbParameters->setEnabled(cnt);
@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->btnInsert->setEnabled(cnt);
     });
 
-    connect(ui->tblFiles, &QMyTableView::pageWasChanged, [=](int old_page, int new_page) {
+    connect(ui->tblFiles, &QMyTableView::pageWasChanged, this, [=](int old_page, int new_page) {
         if (m_customPageSettings.contains(old_page)) {
             PageSetting* old_set = &m_customPageSettings[old_page];
             m_customPageSettings[new_page] = *old_set;
@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
 
-    ui->tblFiles->signalRowCountChanged(0);
+    emit ui->tblFiles->signalRowCountChanged(0);
 
     ui->comboBSF->blockSignals(true);
     for (int i = 2; i <= 12; i++) {
@@ -189,7 +189,8 @@ void MainWindow::on_btnOpenFolder_clicked()
         QDir dir(selected_dir);
 
         QStringList files;
-        for (QFileInfo fi: dir.entryInfoList(QDir::Files)) {
+        const QFileInfoList flist = dir.entryInfoList(QDir::Files);
+        for (const QFileInfo& fi: flist) {
             files.append(fi.absoluteFilePath());
         }
 
@@ -313,7 +314,7 @@ void MainWindow::on_btnDestDjVu_clicked()
 void MainWindow::on_btnOptions_clicked()
 {
     OptionsDialog options;
-    connect(&options, &OptionsDialog::accepted, [=]() {
+    connect(&options, &OptionsDialog::accepted, this, [=]() {
         changeLanguage(m_settings.value("language", "en").toString(), true);
     });
     options.exec();
@@ -368,7 +369,8 @@ void MainWindow::displayDefaultPageSetting()
 void MainWindow::on_rbAll_clicked()
 {
     displayDefaultPageSetting();
-    for (QModelIndex it: ui->tblFiles->selectionModel()->selectedRows()) {
+    const QModelIndexList mlist = ui->tblFiles->selectionModel()->selectedRows();
+    for (const QModelIndex& it: mlist) {
         int page = ui->tblFiles->getPage(it.row());
         m_customPageSettings.remove(page);
     }
@@ -381,8 +383,9 @@ void MainWindow::on_rbCurrent_clicked()
     PageSetting sett = getPageSettingVal();
 
     PageSetting* new_current = nullptr;
-    int current_row = ui->tblFiles->currentIndex().row();
-    for (QModelIndex it: ui->tblFiles->selectionModel()->selectedRows()) {
+    const int current_row = ui->tblFiles->currentIndex().row();
+    const QModelIndexList mlist = ui->tblFiles->selectionModel()->selectedRows();
+    for (const QModelIndex& it: mlist) {
         int page = ui->tblFiles->getPage(it.row());
         m_customPageSettings[page] = sett;
 
@@ -464,7 +467,8 @@ void MainWindow::updateTmpFolderSize()
     QDir dir(m_tmpImagesFolder);
     QFileInfo fi;
     double fsize = 0;
-    for(QString filePath : dir.entryList(QDir::Files)) {
+    const QStringList flist = dir.entryList(QDir::Files);
+    for(const QString& filePath : flist) {
         fi.setFile(dir, filePath);
         fsize += fi.size();
     }

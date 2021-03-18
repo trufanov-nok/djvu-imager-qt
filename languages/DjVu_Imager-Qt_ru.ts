@@ -442,7 +442,7 @@ The files on drive will be kept.</source>
     </message>
     <message>
         <location filename="../qinsertthread.cpp" line="106"/>
-        <source>The file &quot;%1&quot; contains insorrect number of pages: %2.</source>
+        <source>The file &quot;%1&quot; contains incorrect number of pages: %2.</source>
         <translation type="unfinished">Файл &quot;%1&quot; содержит неверное число страниц: %2.</translation>
     </message>
     <message>

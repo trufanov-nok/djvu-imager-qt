@@ -42,7 +42,7 @@ OptionsDialog::~OptionsDialog()
 void OptionsDialog::displayAppSettings()
 {
     ui->cbDPI->setChecked(m_appSettings.changeDPI);
-    ui->cbDPI->stateChanged(m_appSettings.changeDPI);
+    emit ui->cbDPI->stateChanged(m_appSettings.changeDPI);
     ui->comboDPI->setCurrentIndex(
                 ui->comboDPI->findText( QString::number(m_appSettings.DPI) )
                 );
@@ -150,8 +150,9 @@ void OptionsDialog::on_btnTest_clicked()
     int grp = ui->sbGroup->value();
     ui->teDemo->clear();
     QRegularExpression rex(ui->edRegExp->text());
-    for(const QString& fname: ui->teDemoSrc->toPlainText().split("\n")) {
-        QRegularExpressionMatch match = rex.match(fname);
+    const QStringList flist = ui->teDemoSrc->toPlainText().split("\n");
+    for(const QString& fname: flist) {
+        const QRegularExpressionMatch match = rex.match(fname);
         bool ok = false; int res = 0;
         if (match.isValid() && match.lastCapturedIndex() > 0) {
             res = match.captured(grp).toInt(&ok);
