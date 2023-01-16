@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(djvu-imager-qt LANGUAGES CXX)
 
+include_directories(src)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -31,50 +33,47 @@ INCLUDE(cmake/UpdateTranslations.cmake)
 
 # Prepare config.h
 IF(WIN32)
-        SET(TRANSLATIONS_DIR_REL "languages")
-	SET(HELP_DIR_REL "help")
+    SET(TRANSLATIONS_DIR_REL "languages")
+    SET(HELP_DIR_REL "help")
 ELSE(WIN32)
-        SET(TRANSLATIONS_DIR_REL "share/djvu-imager-qt/languages")
-        SET(HELP_DIR_REL "share/djvu-imager-qt/help")
+    SET(TRANSLATIONS_DIR_REL "share/djvu-imager-qt/languages")
+    SET(HELP_DIR_REL "share/djvu-imager-qt/help")
 ENDIF(WIN32)
 SET(TRANSLATIONS_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${TRANSLATIONS_DIR_REL}")
 SET(HELP_DIR_ABS "${CMAKE_INSTALL_PREFIX}/${HELP_DIR_REL}")
 
 CONFIGURE_FILE(config.h.in ${CMAKE_BINARY_DIR}/config.h @ONLY)
 
-
-
-
 qt5_add_resources(RESOURCES "res/appicon.qrc")
 
 set(SOURCES
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    qmytableview.cpp
-    qmytableview.h
-    optionsdialog.cpp
-    optionsdialog.h
-    optionsdialog.ui
-    progressdialog.cpp
-    progressdialog.h
-    progressdialog.ui
-    qconvertthread.cpp
-    qconvertthread.h
-    pageparam.h
-    qviewthread.cpp
-    qviewthread.h
-    qinsertthread.cpp
-    qinsertthread.h
-    utils.cpp
-    utils.h
+    src/mainwindow.cpp
+    src/mainwindow.h
+    src/mainwindow.ui
+    src/qmytableview.cpp
+    src/qmytableview.h
+    src/optionsdialog.cpp
+    src/optionsdialog.h
+    src/optionsdialog.ui
+    src/progressdialog.cpp
+    src/progressdialog.h
+    src/progressdialog.ui
+    src/qconvertthread.cpp
+    src/qconvertthread.h
+    src/pageparam.h
+    src/qviewthread.cpp
+    src/qviewthread.h
+    src/qinsertthread.cpp
+    src/qinsertthread.h
+    src/utils.cpp
+    src/utils.h
+    src/main.cpp
     )
 
 # Translations
 TRANSLATION_SOURCES(
-        DjVu-Imager
-	${SOURCES}
+    DjVu-Imager
+    ${SOURCES}
 )
 FILE(GLOB TRANSLATION_FILES languages/djvu-imager-qt_*.ts)
 
@@ -86,21 +85,21 @@ SET(ts_files ${TRANSLATION_FILES})
 # Don't build *.qm files from *untranslated.ts
 SET(FILTERED_TRANSLATION_FILES)
 FOREACH(ts_file ${ts_files})
-        IF ("${ts_file}" MATCHES ".*untranslated.ts")
-	        # Just skip it.
-		ELSE("${ts_file}" MATCHES ".*untranslated.ts")
-		LIST(APPEND FILTERED_TRANSLATION_FILES "${ts_file}")
-		ENDIF("${ts_file}" MATCHES ".*untranslated.ts")
+    IF ("${ts_file}" MATCHES ".*untranslated.ts")
+        # Just skip it.
+    ELSE("${ts_file}" MATCHES ".*untranslated.ts")
+    LIST(APPEND FILTERED_TRANSLATION_FILES "${ts_file}")
+    ENDIF("${ts_file}" MATCHES ".*untranslated.ts")
 ENDFOREACH(ts_file)
 
 QT5_ADD_TRANSLATION(QM_FILES ${FILTERED_TRANSLATION_FILES})
 
 IF(WIN32 OR APPLE)
-        # Just copy already compiled qtbase*.qm from translations folder
-	# if any of them are present there
-	# to support localization of Qt own controls on Win machines
-	FILE(GLOB QTBASE_QM_FILES languages/qtbase*.qm)
-	LIST(APPEND QM_FILES ${QTBASE_QM_FILES})
+    # Just copy already compiled qtbase*.qm from translations folder
+    # if any of them are present there
+    # to support localization of Qt own controls on Win machines
+    FILE(GLOB QTBASE_QM_FILES languages/qtbase*.qm)
+    LIST(APPEND QM_FILES ${QTBASE_QM_FILES})
 ENDIF(WIN32 OR APPLE)
 
 ADD_CUSTOM_TARGET(compile_translations ALL DEPENDS ${QM_FILES})
@@ -137,12 +136,12 @@ target_link_libraries(djvu-imager-qt PRIVATE Qt5::Widgets)
 
 
 IF(NOT WIN32 AND NOT APPLE)
-        INSTALL(FILES res/djvu-imager-qt.png DESTINATION "/usr/share/pixmaps/")
-        INSTALL(FILES debian/djvu-imager-qt.desktop DESTINATION "/usr/share/applications/")
+    INSTALL(FILES res/djvu-imager-qt.png DESTINATION "/usr/share/pixmaps/")
+    INSTALL(FILES debian/djvu-imager-qt.desktop DESTINATION "/usr/share/applications/")
 ENDIF(NOT WIN32 AND NOT APPLE)
 
 IF(APPLE)
-        INSTALL(TARGETS djvu-imager-qt BUNDLE DESTINATION . RUNTIME DESTINATION bin)
+    INSTALL(TARGETS djvu-imager-qt BUNDLE DESTINATION . RUNTIME DESTINATION bin)
 ELSE(APPLE)
-        INSTALL(TARGETS djvu-imager-qt RUNTIME DESTINATION bin)
+    INSTALL(TARGETS djvu-imager-qt RUNTIME DESTINATION bin)
 ENDIF(APPLE)
